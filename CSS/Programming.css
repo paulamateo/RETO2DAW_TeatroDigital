@@ -1,0 +1,99 @@
+.banner--programming {
+  background-image: url(../IMG/banner_programacion.jpg);
+}
+
+.date {
+  background-color: #b0802c;
+  width: 60px;
+  line-height: 2px;
+  position: absolute;
+  top: 0;
+  left: 40px;
+}
+.date__day {
+  font-weight: 600;
+  font-size: 20px;
+}
+.date__month {
+  font-size: 15px;
+}
+
+.shows__rectangle {
+  background-color: #b20000;
+  text-align: center;
+  color: white;
+  font-weight: 300;
+  padding: 10px;
+}
+.shows__rectangle h2 {
+  font-family: "GothamLight", sans-serif;
+  letter-spacing: 0.15em;
+}
+
+.shows__grid {
+  margin: 50px;
+  color: white;
+  font-weight: 400;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
+.button--programming {
+  margin-top: 20px;
+}
+
+.grid-item {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: 400px;
+}
+.grid-item h2 {
+  font-family: "GothamLight", sans-serif;
+  letter-spacing: 0.15em;
+  margin: 0 20px 0 20px;
+}
+.grid-item__button:hover {
+  background-color: #b0802c;
+}
+.grid-item--image-1 {
+  background-image: url(../IMG/romeoandjuliet.jpeg);
+}
+.grid-item--image-2 {
+  background-image: url(../IMG/macbeth.jpeg);
+}
+.grid-item--image-3 {
+  background-image: url(../IMG/hamlet.jpeg);
+}
+.grid-item--image-4 {
+  background-image: url(../IMG/thenutcracker.jpeg);
+}
+.grid-item--image-5 {
+  background-image: url(../IMG/thedivinecomedy.jpeg);
+}
+.grid-item--image-6 {
+  background-image: url(../IMG/oedipustheking.jpeg);
+}
+.grid-item--image-7 {
+  background-image: url(../IMG/thephantomoftheopera.jpeg);
+}
+.grid-item--image-8 {
+  background-image: url(../IMG/homepage_show2.jpg);
+}
+
+@media screen and (min-width: 990px) {
+  .shows__grid--columns {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 400px;
+    grid-gap: 30px;
+  }
+}
+
+/*# sourceMappingURL=Programming.css.map */

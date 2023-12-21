@@ -1,0 +1,84 @@
+.banner--billboard {
+  background-image: url(../IMG/banner_entradas4.jpg);
+}
+
+.container-show {
+  margin: 40px;
+}
+.container-show-item {
+  background-color: black;
+  border-radius: 20px;
+}
+.container-show-data {
+  color: white;
+  margin: 40px;
+}
+.container-show-data p {
+  font-size: 13px;
+  text-align: justify;
+}
+.container-show-data h1, .container-show-data h3 {
+  margin: 0;
+}
+.container-show-img img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+}
+
+.button--billboard {
+  margin-bottom: 30px;
+}
+
+.data-1 {
+  display: flex;
+}
+.data-1 p {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.data-2__item {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 13px;
+}
+.data-2__item p {
+  margin-right: 30px;
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 700px) {
+  .data-2 {
+    display: flex;
+    right: 0;
+  }
+}
+@media screen and (min-width: 1270px) {
+  .container-show {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 60px 140px;
+    grid-gap: 30px;
+  }
+  .button--billboard {
+    margin-bottom: 0;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .data-information {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/*# sourceMappingURL=Billboard.css.map */

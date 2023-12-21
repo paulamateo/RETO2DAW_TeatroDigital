@@ -1,0 +1,195 @@
+$background-color: #b20000;
+$hover-color: #b0802c;
+$font-color: white;
+$font-family-titles: 'GothamBook', sans-serif;
+$font-family-subtitles: 'GothamLight', sans-serif;
+$letter-spacing: 0.15em;
+$font-weight-title: 400;
+
+
+.shows__rectangle {
+    background-color: $background-color;
+    text-align: center;
+    color: $font-color;
+    font-weight: 300;
+    padding: 25px;
+
+    h2 {
+        font-family: $font-family-subtitles;
+        letter-spacing: $letter-spacing;
+    }
+}
+
+.shows__grid {
+    margin: 50px;
+    color: $font-color;
+    font-weight: $font-weight-title;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 400px);
+    grid-gap: 30px;
+}
+
+.button--index {
+    margin: 0;
+}
+
+.grid-item {
+    color: $font-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+
+    h2 {
+        font-family: $font-family-subtitles;
+        letter-spacing: $letter-spacing;
+    }
+
+    &__button:hover {
+        background-color: $hover-color;
+    }
+
+    &--image-1 {
+        background-image: url(../IMG/thedivinecomedy.jpeg);
+    }
+
+    &--image-2 {
+        background-image: url(../IMG/homepage_show2.jpg);
+    }
+
+    &--image-3 {
+        background-image: url(../IMG/oedipustheking.jpeg);
+    }
+
+    &__button--position {
+        margin: 30px 0 0 auto;
+    }
+}
+
+.hero-banner {
+    background-image: url(../IMG/banner_homepage.png);
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    letter-spacing: $letter-spacing;
+
+    h4 {
+        font-size: 80%;
+    }
+
+    h1 {
+        font-size: 200%;
+        font-family: $font-family-titles;
+        font-weight: $font-weight-title;
+        padding: 0 40px 25px 40px;
+    }
+
+    &__subtitles {
+        font-family: $font-family-subtitles;
+        margin: 40px 0 0 0;
+        padding: 0 40px 25px 40px;
+    }
+
+    &__line {
+        border: 2px solid $font-color;
+        width: 50px;
+    }
+
+    &__content {
+        text-align: center;
+        color: $font-color;
+
+        h1 {
+            margin: 0;
+        }
+    }
+}
+
+.chevronleft-icon {
+    cursor: pointer;
+    color: $font-color;
+    position: absolute;
+    bottom: 50px;
+    animation: arrow 2s infinite ;
+}
+
+.second-banner {
+    background-image: url(../IMG/banner_homepage_2.jpg);
+    background-size: cover; 
+    background-position: center; 
+    color: $font-color;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+
+    p, h2 {
+        margin: 0;
+    }
+
+    &__content {
+        width: 55%;
+        margin: 0 0 0 50px;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-family: $font-family-subtitles;
+            letter-spacing: $letter-spacing;
+            padding-bottom: 20px;
+        }
+    }
+
+    &__review {
+        margin: 10px 0 10px 0;
+        font-size: 9px;
+    }
+}
+
+.map {
+    filter: grayscale(100%);
+}
+
+@media screen and (min-width: 990px) {
+    .shows__grid--columns {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 400px;
+        grid-gap: 30px;
+    }
+
+    .second-banner__review {
+        font-size: 14px;
+    }
+
+    .second-banner__content {
+        margin: 0 0 0 80px;
+        line-height: 20px;
+    }
+
+    .hero-banner {
+        h1 {
+            font-size: 280%;
+        }
+
+        &__subtitles {
+            line-height: 5px;
+            font-size: 120%;
+        }
+    }
+}
+
+@keyframes arrow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}

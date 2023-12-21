@@ -1,0 +1,164 @@
+.shows__rectangle {
+  background-color: #b20000;
+  text-align: center;
+  color: white;
+  font-weight: 300;
+  padding: 25px;
+}
+.shows__rectangle h2 {
+  font-family: "GothamLight", sans-serif;
+  letter-spacing: 0.15em;
+}
+
+.shows__grid {
+  margin: 50px;
+  color: white;
+  font-weight: 400;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 400px);
+  grid-gap: 30px;
+}
+
+.button--index {
+  margin: 0;
+}
+
+.grid-item {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+}
+.grid-item h2 {
+  font-family: "GothamLight", sans-serif;
+  letter-spacing: 0.15em;
+}
+.grid-item__button:hover {
+  background-color: #b0802c;
+}
+.grid-item--image-1 {
+  background-image: url(../IMG/thedivinecomedy.jpeg);
+}
+.grid-item--image-2 {
+  background-image: url(../IMG/homepage_show2.jpg);
+}
+.grid-item--image-3 {
+  background-image: url(../IMG/oedipustheking.jpeg);
+}
+.grid-item__button--position {
+  margin: 30px 0 0 auto;
+}
+
+.hero-banner {
+  background-image: url(../IMG/banner_homepage.png);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  letter-spacing: 0.15em;
+}
+.hero-banner h4 {
+  font-size: 80%;
+}
+.hero-banner h1 {
+  font-size: 200%;
+  font-family: "GothamBook", sans-serif;
+  font-weight: 400;
+  padding: 0 40px 25px 40px;
+}
+.hero-banner__subtitles {
+  font-family: "GothamLight", sans-serif;
+  margin: 40px 0 0 0;
+  padding: 0 40px 25px 40px;
+}
+.hero-banner__line {
+  border: 2px solid white;
+  width: 50px;
+}
+.hero-banner__content {
+  text-align: center;
+  color: white;
+}
+.hero-banner__content h1 {
+  margin: 0;
+}
+
+.chevronleft-icon {
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  bottom: 50px;
+  animation: arrow 2s infinite;
+}
+
+.second-banner {
+  background-image: url(../IMG/banner_homepage_2.jpg);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.second-banner p, .second-banner h2 {
+  margin: 0;
+}
+.second-banner__content {
+  width: 55%;
+  margin: 0 0 0 50px;
+  display: flex;
+  flex-direction: column;
+}
+.second-banner__content h2 {
+  font-family: "GothamLight", sans-serif;
+  letter-spacing: 0.15em;
+  padding-bottom: 20px;
+}
+.second-banner__review {
+  margin: 10px 0 10px 0;
+  font-size: 9px;
+}
+
+.map {
+  filter: grayscale(100%);
+}
+
+@media screen and (min-width: 990px) {
+  .shows__grid--columns {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 400px;
+    grid-gap: 30px;
+  }
+  .second-banner__review {
+    font-size: 14px;
+  }
+  .second-banner__content {
+    margin: 0 0 0 80px;
+    line-height: 20px;
+  }
+  .hero-banner h1 {
+    font-size: 280%;
+  }
+  .hero-banner__subtitles {
+    line-height: 5px;
+    font-size: 120%;
+  }
+}
+@keyframes arrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/*# sourceMappingURL=Index.css.map */
