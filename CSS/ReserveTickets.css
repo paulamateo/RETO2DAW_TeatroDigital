@@ -38,7 +38,6 @@ h2 {
   background-color: #37b02c;
   border: 1px solid #37b02c;
   cursor: pointer;
-  border-radius: 100%;
 }
 .seat.selected {
   background-color: blue;
@@ -277,9 +276,10 @@ h2 {
     font-size: 13px;
   }
   .seat {
-    width: 18px;
-    height: 18px;
-    margin: 2px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 5px;
   }
   .aisle {
     width: 18px;

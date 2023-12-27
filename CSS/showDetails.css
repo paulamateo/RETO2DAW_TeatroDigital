@@ -1,0 +1,365 @@
+.banner--show {
+    background-image: url(../IMG/banner2-oedipus.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-direction: column;
+}
+
+.banner--show h1 {
+    padding-top: 90px;
+    margin: 0;
+}
+  
+.banner--show h3 {
+    margin: 10px;
+    font-weight: 400;
+}
+
+.details-show {
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.details-show__item {
+    font-size: 11px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.details-show__item p {
+    margin: 0;
+}
+
+.details-show__item svg {
+    margin-bottom: 10px;
+}
+
+.details-show__item--link {
+    cursor: pointer;
+}
+
+.reserve-seats {
+    margin: 40px;
+}
+
+.reserve-seats h2 {
+    text-align: center;
+}
+
+.seats-data {
+    margin: 0 0 20px 0;
+    font-size: 9px;
+}
+
+.panel-seats {
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 30px 0;
+}
+
+.panel-seats__item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 10px;
+    text-align: center;
+}
+
+.seat {
+    color: white;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #37b02c;
+    border-radius: 3px;
+    border: 2px solid #37b02c;
+    cursor: pointer;
+    margin: 0.7vw;
+    font-size: 5px;
+}
+
+.seat-row {
+    display: flex;
+}
+
+.seat-deleted {
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #181818;
+    border-radius: 5px;
+    border: 2px solid #181818;
+    margin: 0.7vw;
+}
+  
+.seat.selected {
+    background-color: blue;
+    border: 2px solid blue;
+}
+
+.key {
+    display: flex;
+}
+
+.square {
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.square--colour-selected {
+    background-color: blue;
+}
+
+.square--colour-disponible {
+    background-color: #37b02c;
+}
+
+.square--colour-no-disponible {
+    background-color: #e92e19;
+}
+
+.option-key {
+    display: flex;
+    align-items: center;
+    margin: 0 30px 0 0;
+}
+
+.option-key p {
+    margin: 0 0 0 10px;
+}
+
+.option-key:last-child {
+    margin: 0;
+}
+
+.panel-payment {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 0 0 30px 0;
+}
+
+.panel-payment h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.panel-box {
+    position: relative;
+    color: #0b0b0b;
+    width: 100%;
+}
+  
+.icon-panel {
+    position: absolute;
+    color: #c3c3c3;
+    left: 15px;
+    top: 8px;
+}
+
+.input-payment-panel {
+    width: calc(100% - 20px);
+    border: none;
+    background-color: white;
+    padding: 10px;
+    margin: 0 0 15px 0;
+    border-radius: 20px;
+    font-family: "Inter", sans-serif;
+    text-indent: 40px;
+    outline: none;
+    font-size: 12px;
+}
+
+.input-payment-panel::placeholder {
+    color: #c3c3c3;
+}
+  
+.panel-box-double {
+    display: flex;
+    gap: 20px;
+}
+
+.button-pay {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin: 0;
+}
+
+.tickets {
+    border: 2px dashed white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.tickets p {
+    font-size: 10px;
+    color: white;
+    text-align: center;
+}
+
+.individual-ticket {
+    font-size: 10px;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 0 0 20px 0;
+    position: relative;
+}
+
+.individual-ticket p {
+    margin: 0;
+}
+
+.individual-ticket__data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trash-icon {
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px 10px 0 0;
+}
+
+.popup-overview {
+    position: fixed;
+    border: 3px solid black;
+    color: black;
+    background-color: white;
+    z-index: 100;
+    top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    font-size: 10px;
+    text-align: justify;
+    display: none;
+}
+
+.popup-overview.active {
+    display: block;
+}
+
+.popup-overview__content {
+    margin: 30px;
+}
+
+.x-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.container-icon {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px 0;
+}
+
+
+@media (min-width: 780px) {
+    .popup-overview {
+        font-size: 14px;
+    }
+
+    .details-show {
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px;
+    }
+
+    .reserve-seats {
+        margin: 50px;
+    }
+
+    .reserve-seats h2 {
+        text-align: left;
+    }
+
+    .payment-area {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .square {
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .seats-data {
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .seat {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+
+    .seat-deleted {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+    }
+}
+
+@media (min-width: 1330px) {
+    .reserve-seats {
+        margin: 50px 140px;
+        overflow: hidden;
+    }
+
+    .payment-area {
+        display: block;
+    }
+    
+    .reserve-seats__content {
+        display: grid;
+        grid-template-columns: 70% 25%;
+        gap: 50px;
+        box-sizing: border-box;
+    }
+
+    .seat {
+        font-size: 0.7vw;
+        width: 2.5vw;
+        height:  2.5vw;
+        background-color: #37b02c;
+        border-radius: 10px;
+        border: 2px solid #37b02c;
+        cursor: pointer;
+        margin: 0.4vw;
+    }
+
+    .seat-deleted {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+}
