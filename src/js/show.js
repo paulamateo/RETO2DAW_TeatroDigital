@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePopup();
 });
 
+
 function initializeSeats() {
     const areaSeatsContainer = document.getElementById('area-seats');
     const seatsPerRow = 15;
