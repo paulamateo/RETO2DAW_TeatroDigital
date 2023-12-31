@@ -25,11 +25,6 @@ h2 {
     width: 80%;
 }
 
-.currentDay {
-    background-color: aqua; /* Cambia esto al color que desees para el fondo del día actual */
-    color: black; /* Cambia esto al color que desees para el texto del día actual */
-    font-weight: 700;
-}
 
 .dot {
     display: block;
@@ -41,10 +36,7 @@ h2 {
   }
 
 
-.today {
-    background-color: #ccc; /* Cambia el color de fondo a tu preferencia, por ejemplo, gris claro (#ccc) */
-    color: #000; /* Cambia el color del texto si es necesario */
-}
+
 
 
 .month {
