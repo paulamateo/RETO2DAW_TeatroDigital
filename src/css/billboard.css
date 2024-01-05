@@ -18,6 +18,7 @@
     text-align: center;
     height: auto;
     margin-bottom: 30px;
+    cursor: pointer;
   }
   .container-item img {
     width: 100%;
@@ -33,19 +34,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
   }
   
   .genre {
     all: unset;
     position: absolute;
-    top: 15px;
+    top: 10px;
     left: 15px;
     background-color: #b20000;
     color: white;
     padding: 15px;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 12px;
     margin: 15px 0 0 10px;
+    text-transform: uppercase;
   }
   
   @media (min-width: 760px) {
