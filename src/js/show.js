@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeSeats();
-    initializePopup();
 });
 
 
@@ -35,19 +34,5 @@ function initializeSeats() {
         seat.addEventListener('click', function () {
             seat.classList.toggle('selected');
         });
-    });
-}
-
-function initializePopup() {
-    const button = document.getElementById('button-overview');
-    const overview = document.getElementById('popup-overview');
-    const closePopUp = document.getElementById('close-popup');
-
-    button.addEventListener('click', function () {
-        overview.classList.toggle('active');
-    });
-
-    closePopUp.addEventListener('click', function () {
-        overview.classList.remove('active');
     });
 }

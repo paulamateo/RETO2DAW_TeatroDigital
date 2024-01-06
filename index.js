@@ -13,15 +13,12 @@ function loadShowsToJson() {
   try {
     const jsonData = fs.readFileSync('./server/data.json', 'utf8');
     shows = JSON.parse(jsonData);
-    // shows.forEach((show, index) => {
-    //   show.id = index + 1;
-    // });
   }catch (error) {
     console.error('Error reading JSON file:', error);
   }
 }
 
-//PETICION GET PARA OBTENER EL LISTADO DE OBRAS (CARTELERA)
+// Peticion get para obtener el listado de obras (para la cartelera)
 app.get('/shows', (req, res) => {
   try {
     res.send(shows);
@@ -30,7 +27,7 @@ app.get('/shows', (req, res) => {
   }
 });
 
-//PETICION GET PARA OBTENER UNA OBRA POR EL ID
+// Peticion get para obtener los detalles de una obra por el ID
 app.get('/shows/:id', (req, res) => {
   const numberID = parseInt(req.params.id);
   const result = shows.filter(show => show.id === numberID);
