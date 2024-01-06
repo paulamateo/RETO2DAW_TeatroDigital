@@ -1,8 +1,17 @@
 .banner--show {
-    background-image: url(../img/banner2-oedipus.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
     flex-direction: column;
+}
+
+.details-show__date {
+    display: flex;
+    justify-content: center;
+}
+
+.separation {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .banner--show h1 {

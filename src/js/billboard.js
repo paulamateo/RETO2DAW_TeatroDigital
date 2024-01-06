@@ -16,6 +16,10 @@ window.onload = function() {
           </div>
         `;
 
+        showItem.addEventListener('click', function() {
+          window.location.href = `show.html?title=${show.title}&id=${show.id}`;
+        })
+
         container.appendChild(showItem);
       });
     })
