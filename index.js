@@ -38,6 +38,18 @@ app.get('/shows/:id', (req, res) => {
   }
 });
 
+// Peticion get para obtener obras por género
+app.get('/shows/genre/:genre', (req, res) => {
+  const genre = req.params.genre.toLowerCase(); 
+  const result = shows.filter(show => show.genre.toLowerCase() === genre);
+  if (result.length > 0) {
+    res.send(result);
+  }else {
+    res.sendStatus(404);
+  }
+});
+
+
 app.listen(port, () => {
   loadShowsToJson();
   console.log(`App listening on port ${port}`);
