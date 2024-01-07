@@ -55,7 +55,7 @@
   }
   
   .hero-banner {
-    background-image: url(../img/banner_homepage.png);
+    background-image: url(../img/elements/banner_homepage.png);
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -100,7 +100,7 @@
   }
   
   .second-banner {
-    background-image: url(../img/banner_homepage_2.jpg);
+    background-image: url(../img/elements/banner_homepage_2.jpg);
     background-size: cover;
     background-position: center;
     color: white;
