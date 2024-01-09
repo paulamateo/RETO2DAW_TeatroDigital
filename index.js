@@ -49,6 +49,18 @@ app.get('/shows/genre/:genre', (req, res) => {
   }
 });
 
+//Peticion get para obtener los generos de obras que hay
+app.get('/genres', (req, res) => {
+  let genres = [];
+  for (let i = 0; i < shows.length; i++) {
+    if (!genres.includes(shows[i].genre)) {
+      genres.push(shows[i].genre);
+    };
+  };
+  genres.sort();
+  res.send(genres);
+});
+
 
 app.listen(port, () => {
   loadShowsToJson();

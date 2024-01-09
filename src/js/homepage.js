@@ -14,12 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 gridItem.innerHTML = `
                     <h2>${show.title}</h2>
-                    <button class="button button--index" type="submit">VER ENTRADAS</button>
+                    <button class="button button--index" type="submit" id="button">VER ENTRADAS</button>
                 `;
 
                 gridItem.style.backgroundImage = `url(${show.scene})`;
 
                 grid.appendChild(gridItem);
+
+                let button_grid = gridItem.querySelector('.button--index');
+                button_grid.addEventListener('click', function() {
+                    window.location.href = `show.html?title=${show.title}&id=${show.id}`;
+                })
             })
         })
         .catch(error => console.error('Error fetching genre:', error));
