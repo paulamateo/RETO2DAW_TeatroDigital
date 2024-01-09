@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartelera</title>
-    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/elements/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/elements.css">
     <link rel="stylesheet" href="../css/billboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
                 </svg>
             </div>
             <div class="header__logo">
-                <a href="index.html"><img class="logo logo--size" id="logoImage" src="../img/logo_negro.png"/></a>
+                <a href="index.html"><img class="logo logo--size" id="logoImage" src="../img/elements/logo_negro.png"/></a>
             </div>
             <nav class="menu">
                 <ul>
@@ -81,6 +81,16 @@
         <div class="banner banner--tickets">
             <h1>CARTELERA</h1>
         </div>
+
+        <div class="select-genre__form">
+            <form method="POST">
+                <label for="genre">Filtrar por</label>
+                <select name="genre" id="genre">
+                    <option value="" selected disabled hidden><span>GÉNERO</span></option>
+                </select>
+            </form>
+        </div>
+      
         <div class="container" id="container"></div>
     </main>
 
