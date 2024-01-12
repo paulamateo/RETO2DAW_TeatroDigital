@@ -132,6 +132,16 @@
             </div>
         </div>
 
+        <div class="overlay" id="overlay">
+            <div class="popup-purchase" id="popup-purchase">
+                <div class="popup-overview__content">                
+                    <h3>¡Gracias por la compra!</h3>
+                    <p>En breve recibirás un correo electrónico con las entradas.</p>
+                    <button class="button" id="button-close" type="submit">CERRAR</button>
+                </div>
+            </div>
+        </div>
+
         <div class="reserve-seats">
             <h2>RESERVAR ENTRADAS</h2>
             <div class="reserve-seats__content">
@@ -160,13 +170,13 @@
     
                 <div class="payment-area">
                     <div class="panel-payment">
-                        <h3>BUTACAS SELECCIONADAS</h3>
+                        <h3>TICKETS</h3>
                         
                         <div class="advertisement-tickets" id="ad"></div>
 
                         <div class="selected-tickets" id="selected-tickets"></div>
                         <hr>
-                        <div class="price">
+                        <div class="price" id="total-price-tickets">
                             <p>Total</p>
                             <p><strong><span id="details-show__total-price"></span>€</strong></p>
                         </div>
@@ -249,7 +259,6 @@
         </div>
     </footer>
     <script src="../js/homepage.js"></script>
-    <script src="../js/show.js"></script>
     <script src="../js/details.js"></script>
 </body>
 </html>

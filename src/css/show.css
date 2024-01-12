@@ -208,7 +208,7 @@
 
 .tickets {
     border: 2px dashed white;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 20px;
 }
 
@@ -275,6 +275,44 @@
 .popup-overview__content {
     margin: 30px;
 }
+
+
+.overlay {
+    background-color: rgba(1, 1, 1, 0);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    visibility: hidden;
+    z-index: 3;
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    transition: background-color 0.9s ease;
+}
+
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(1, 1, 1, 0.5);
+}
+
+.popup-purchase {
+    position: fixed;
+    color: black;
+    background-color: white;
+    z-index: 100;
+    top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: justify;
+}
+
+
 
 .x-icon {
     position: absolute;

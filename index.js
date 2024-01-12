@@ -18,7 +18,7 @@ function loadShowsToJson() {
   }
 }
 
-// Peticion get para obtener el listado de obras (para la cartelera)
+// Peticion GET para obtener el listado de obras (para la cartelera)
 app.get('/shows', (req, res) => {
   try {
     res.send(shows);
@@ -27,7 +27,7 @@ app.get('/shows', (req, res) => {
   }
 });
 
-// Peticion get para obtener los detalles de una obra por el ID
+// Peticion GET para obtener los detalles de una obra por ID
 app.get('/shows/:id', (req, res) => {
   const numberID = parseInt(req.params.id);
   const result = shows.filter(show => show.id === numberID);
@@ -38,7 +38,7 @@ app.get('/shows/:id', (req, res) => {
   }
 });
 
-// Peticion get para obtener obras por género
+// Peticion GET para obtener obras por genero
 app.get('/shows/genre/:genre', (req, res) => {
   const genre = req.params.genre.toLowerCase(); 
   const result = shows.filter(show => show.genre.toLowerCase() === genre);
@@ -49,7 +49,7 @@ app.get('/shows/genre/:genre', (req, res) => {
   }
 });
 
-//Peticion get para obtener los generos de obras que hay
+//Peticion GET para obtener los generos de obras que hay
 app.get('/genres', (req, res) => {
   let genres = [];
   for (let i = 0; i < shows.length; i++) {
