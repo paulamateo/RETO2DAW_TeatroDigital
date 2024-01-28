@@ -1,0 +1,214 @@
+$background-color: #b20000;
+$border-color-show: #cfcfcf;
+$text-color: white;
+$table-color: black;
+$text-size-show: 12px;
+$hover-color: #ccc;
+$hover-color-table: #e4e4e4;
+$line-color: #b0802c;
+$font-family-calendar: 'GothamBook', sans-serif;
+
+
+.banner--programming {
+    background-image: url(../img/elements/banner_programming.jpg);
+
+    h1 {
+        padding-top: 70px;
+    }
+}
+
+.weekday-panel {
+    text-align: center;
+}
+
+.info-panel {
+    display: flex;
+    font-size: 13px;
+
+    p {
+        margin: 0;
+        margin-top: 15px;
+    }
+}
+
+.show-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid $border-color-show;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.buy-tickets__button {
+    all: unset;
+    background-color: $background-color;
+    color: $text-color;
+    font-size: 10px;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.img-events-panel {
+    max-width: 100%;
+    height: auto;
+}
+
+.no-events {
+    font-size: $text-size-show;
+    text-align: center;
+    border: 1px solid $border-color-show;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.arrow {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.no-hover:hover {
+    background-color: $text-color;
+    color: $hover-color;
+} 
+
+.different-hover:hover {
+    background-color: $background-color;
+    color: $text-color;
+}
+
+.shows-list {
+    display: flex;
+    align-items: center;
+}
+
+.show-line {
+    flex-grow: 1;
+    height: 3px;
+    background-color: $line-color;
+}
+
+.next-month-day, .prev-month-day {
+    color: $hover-color;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid $border-color-show;
+    cursor: pointer;
+}
+
+th {
+    background-color: $table-color;
+    color: $text-color;
+    border: 1px solid $table-color;
+    font-size: $text-size-show;
+}
+
+td:hover {
+    background-color: $hover-color-table;
+}
+
+.day-cell-content {
+    display: flex;
+    flex-direction: column;
+}
+
+span {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.month-header {
+    font-family: $font-family-calendar;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 20px;
+    background-color: $background-color;
+    color: $text-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.month-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-day {
+    background-color: $background-color; 
+    color: $text-color;
+}
+
+.container-calendar-events {
+    margin: 40px 20px;
+}
+
+.calendar-container {
+    width: 100%;
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.date-panel {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.info-panel__name {
+    font-weight: 600;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 600px) {
+    .container-calendar-events {
+        margin: 50px 100px;
+    }
+}
+
+@media (min-width: 990px) {
+    .container-calendar-events {
+        margin: 50px 120px;
+        display: flex;
+        gap: 40px;
+    }
+
+    #calendar-container {
+        width: 75%;
+        font-size: 14px;
+    }
+    
+    #date-panel {
+        width: 25%;
+        margin-top: 0;
+    }
+
+}
+
+@media (min-width: 1090px) {
+    .info-panel {
+        display: flex;
+    }
+}

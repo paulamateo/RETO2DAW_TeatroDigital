@@ -25,6 +25,7 @@ window.onload = function () {
 
                 const calendarTable = document.createElement('table');
 
+                //Fila días de la semana
                 const daysOfWeek = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
                 const headerRow = document.createElement('tr');
 
@@ -42,6 +43,7 @@ window.onload = function () {
 
                 let dayCounter = 1;
 
+                //Filas del mes correspondiente
                 for (let i = 0; i < 5; i++) {
                     const row = document.createElement('tr');
 
@@ -78,16 +80,13 @@ window.onload = function () {
                             dayCellContent.appendChild(showsList);
                             cell.appendChild(dayCellContent);
 
-                            if (
-                                currentDate.getFullYear() === year &&
-                                currentDate.getMonth() + 1 === month &&
-                                dayCounter === currentDate.getDate()
-                            ) {
-                                // Marcar el día actual
+                            //Día actual
+                            if (currentDate.getFullYear() === year && currentDate.getMonth() + 1 === month && dayCounter === currentDate.getDate()) {
                                 cell.classList.add('current-day', 'different-hover');
                             }
 
                             dayCounter++;
+
                         }else {
                             // Días posteriores al mes
                             const nextMonthDay = dayCounter - daysInMonth;
@@ -98,8 +97,7 @@ window.onload = function () {
 
                         row.appendChild(cell);
 
-
-                        // Añadir evento de clic a cada celda
+                        //Evento (click) para cada celda. Actualización del panel
                         if (!cell.classList.contains('prev-month-day') && !cell.classList.contains('next-month-day')) {
                             cell.addEventListener('click', function () {
                                 const clickedDate = new Date(year, month - 1, parseInt(cell.textContent));
@@ -109,7 +107,6 @@ window.onload = function () {
                             });
                         }
 
-                        
                     }
 
                     calendarTable.appendChild(row);
@@ -125,14 +122,16 @@ window.onload = function () {
     }
 
 
-    //CREATE HEADER (MONTH + <> BUTTONS)
+    //Cabecera del calendario (mes + botones)
     function createMonthHeader(year, month) {
         const monthHeader = document.createElement('div');
         monthHeader.classList.add('month-header');
 
+        //Mes actual
         const monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
         monthHeader.innerHTML = `<h3>${monthName} ${year}</h3>`;
 
+        //Botones para cambiar de mes
         const monthNavigation = document.createElement('div');
         monthNavigation.classList.add('month-navigation');
 
@@ -167,14 +166,15 @@ window.onload = function () {
     }
 
 
-
-
+    //Panel de eventos
     function updateDatePanel(date, shows) {
+        //Día actual o celda escogida
         const weekdayName = date.toLocaleDateString('default', { weekday: 'long' });
         const capitalizedWeekday = weekdayName.charAt(0).toUpperCase() + weekdayName.slice(1);
         const monthName = date.toLocaleString('default', { month: 'long' });
-        datePanel.innerHTML = `<h3>${capitalizedWeekday}, ${date.getDate()} de ${monthName} de ${date.getFullYear()}</h3>`;    
+        datePanel.innerHTML = `<h3 class="weekday-panel">${capitalizedWeekday}, ${date.getDate()} de ${monthName} de ${date.getFullYear()}</h3>`;    
 
+        //Obras
         if (shows.length > 0) {
             const showsList = document.createElement('div');
             shows.forEach(show => {
@@ -182,7 +182,7 @@ window.onload = function () {
                 showItem.classList.add('show-item');
 
                 const showDateTime = new Date(show.date);
-                const showTime = showDateTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+                const showTime = showDateTime.toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
 
                 showItem.innerHTML = `
                     <div class="image-container">
@@ -190,8 +190,8 @@ window.onload = function () {
                         <button class="buy-tickets__button">COMPRAR</button>
                     </div>
                     <div class="info-panel">
-                        <p>${showTime}</p>
-                        <p><strong>${show.name}</strong><p>
+                        <p>${showTime}h</p>
+                        <p class="info-panel__name">${show.name}<p>
                     </div>
                 `;
 
@@ -202,35 +202,26 @@ window.onload = function () {
                     window.location.href = `show.html?title=${show.title}&id=${show.id}`;
                 })
 
-                // const showTime = `${show.start.toLocaleTimeString()} - ${show.end.toLocaleTimeString()}`;
-                // const showTitle = document.createTextNode(`${show.title}: ${showTime}`);
-
             });
-
-            // const showsList = document.createElement('ul');
-            // shows.forEach(show => {
-            //     const showItem = document.createElement('li');
-            //     const showDateTime = new Date(show.date);
-            //     const showTime = showDateTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
-
-            //     showItem.textContent = `${show.name} - ${showTime}`;
-            //     showsList.appendChild(showItem);
-            // });
 
             datePanel.appendChild(showsList);
         } else {
-            datePanel.innerHTML += `<div class="no-events">
-                                    <p>No hay ningún espectáculo programado para hoy.</p>
-                                    </div>`;
+            datePanel.innerHTML += `
+                <div class="no-events">
+                    <p>No hay ningún espectáculo programado para hoy.</p>
+                </div>
+            `;
         }
     }
 
-    // Mostrar el calendario del mes actual al cargar la página
+
+    //Mostrar calendario
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
     generateCalendar(currentYear, currentMonth);
 
-    // Actualizar el panel de fecha
+
+    //Actualizar el panel con la fecha actual
     updateDatePanel(currentDate, []);
 }
