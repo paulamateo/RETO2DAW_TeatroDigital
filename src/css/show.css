@@ -110,6 +110,11 @@
     border: 2px solid blue;
 }
 
+.seat.reserved {
+    background-color: #e92e19;
+    border: 2px solid #e92e19;
+}
+
 .key {
     display: flex;
 }

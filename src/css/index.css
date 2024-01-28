@@ -3,7 +3,7 @@
     text-align: center;
     color: white;
     font-weight: 300;
-    padding: 25px;
+    padding: 15px;
   }
   .shows__rectangle h2 {
     font-family: "GothamLight", sans-serif;
@@ -41,15 +41,7 @@
   .grid-item__button:hover {
     background-color: #b0802c;
   }
-  /* .grid-item--image-1 {
-    background-image: url(../img/thedivinecomedy.jpeg);
-  }
-  .grid-item--image-2 {
-    background-image: url(../img/homepage_show2.jpg);
-  }
-  .grid-item--image-3 {
-    background-image: url(../img/oedipustheking.jpeg);
-  } */
+  
   .grid-item__button--position {
     margin: 30px 0 0 auto;
   }
@@ -104,7 +96,7 @@
     background-size: cover;
     background-position: center;
     color: white;
-    height: 70vh;
+    height: 80vh;
     display: flex;
     align-items: center;
   }
@@ -113,6 +105,7 @@
   }
   .second-banner__content {
     width: 55%;
+    text-align: justify;
     margin: 0 0 0 50px;
     display: flex;
     flex-direction: column;
@@ -122,6 +115,7 @@
     letter-spacing: 0.15em;
     padding-bottom: 20px;
   }
+
   .second-banner__review {
     margin: 10px 0 10px 0;
     font-size: 9px;

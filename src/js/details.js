@@ -1,6 +1,30 @@
 window.onload = function() {
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get("id");
+    const purchasedSeats = [];
+    const reservedSeats = [];
+
+    function savePurchasedSeat(seatId) {
+        purchasedSeats.push(seatId);
+    }
+
+    // function printPurchasedSeats() {
+    //     console.log("Asientos comprados:", purchasedSeats.join(", "));
+    // }
+
+    function markReservedSeats() {
+        const areaSeatsContainer = document.getElementById('area-seats');
+        const allSeats = areaSeatsContainer.querySelectorAll('.seat');
+
+        reservedSeats.forEach(reservedSeat => {
+            const seatElement = allSeats[reservedSeat - 1]; // -1 because seat numbers start from 1
+            if (seatElement) {
+                seatElement.classList.add('reserved');
+                seatElement.style.cursor = 'default'; 
+            }
+        });
+    }
+    
 
     checkAndRemoveAD();
     
@@ -8,6 +32,7 @@ window.onload = function() {
     .then(response => response.json())
     .then(shows => {
         const show = shows[0];
+        reservedSeats.push(...show.reservedSeats);
         calculatePrice(show);
 
         showDetails(show);
@@ -29,59 +54,76 @@ window.onload = function() {
                 const removeSeat = document.createElement('div');
                 removeSeat.classList.add('seat-deleted');
                 areaSeatsContainer.lastChild.appendChild(removeSeat);
-            } else {
+            }else {
                 const seatItem = document.createElement('div');
                 seatItem.classList.add('seat');
                 seatItem.textContent = seatCounter++;
                 areaSeatsContainer.lastChild.appendChild(seatItem);
-    
-                seatItem.addEventListener('click', function () {
-                    if (!seatItem.classList.contains('selected')) {
-                        seatItem.classList.toggle('selected');
-    
-                        const containerTickets = document.getElementById('selected-tickets');
-                        let ticketItem = document.createElement('div');
-                        ticketItem.classList.add('individual-ticket');
-                        ticketItem.dataset.seatNumber = seatItem.textContent;
-                        ticketItem.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="trash-icon" id="trash-icon" viewBox="0 0 16 16">
-                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                            </svg>
-                            <p><strong>Entrada para "${show.title}"</strong></p>
-                            <p>BUTACA ${seatItem.textContent}</p>
-                            <div class="individual-ticket__data">
-                                <p>Fila ${calculateRow(seatItem.textContent)} | Columna ${calculateColumn(seatItem.textContent)}</p>
-                                <p id="show__price"><strong>${show.price}€</strong></p>
-                            </div>
-                        `;
-                        containerTickets.appendChild(ticketItem);
-                        calculatePrice(show);
+
+                if (reservedSeats.includes(seatCounter)) {
+                    seatItem.classList.add('reserved');
+                    seatItem.style.cursor = 'default'; 
+                }
+
+               
+                    seatItem.addEventListener('click', function () {
+                        if (!seatItem.classList.contains('selected')  && !seatItem.classList.contains('reserved')) {
+                            seatItem.classList.toggle('selected');
+                            savePurchasedSeat(seatItem.textContent);
         
-                        const trashIcon = ticketItem.querySelector('.trash-icon');
-                        trashIcon.addEventListener('click', function () {
                             const containerTickets = document.getElementById('selected-tickets');
-                            containerTickets.removeChild(ticketItem);
-                            seatItem.classList.remove('selected');
-                        
-                            selectedTicketCount = document.querySelectorAll('.seat.selected').length;
-                        
-                            checkAndRemoveAD();
+                            let ticketItem = document.createElement('div');
+                            ticketItem.classList.add('individual-ticket');
+                            ticketItem.dataset.seatNumber = seatItem.textContent;
+                            ticketItem.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="trash-icon" id="trash-icon" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                                <p><strong>Entrada para "${show.title}"</strong></p>
+                                <p>BUTACA ${seatItem.textContent}</p>
+                                <div class="individual-ticket__data">
+                                    <p>Fila ${calculateRow(seatItem.textContent)} | Columna ${calculateColumn(seatItem.textContent)}</p>
+                                    <p id="show__price"><strong>${show.price}€</strong></p>
+                                </div>
+                            `;
+                            containerTickets.appendChild(ticketItem);
                             calculatePrice(show);
-                        });
-                        
-                     
-                        checkAndRemoveAD();
-                    }    
-                });
+                            // printPurchasedSeats();
+            
+                            const trashIcon = ticketItem.querySelector('.trash-icon');
+                            trashIcon.addEventListener('click', function () {
+                                const containerTickets = document.getElementById('selected-tickets');
+                                containerTickets.removeChild(ticketItem);
+                                seatItem.classList.remove('selected');
+                            
+                                selectedTicketCount = document.querySelectorAll('.seat.selected').length;
+    
+                                const indexToRemove = purchasedSeats.indexOf(seatItem.textContent);
+                                if (indexToRemove !== -1) {
+                                    purchasedSeats.splice(indexToRemove, 1);
+                                }
+                            
+                                checkAndRemoveAD();
+                                calculatePrice(show);
+                                // printPurchasedSeats();
+                            });
+                            
+                         
+                            checkAndRemoveAD();
+                        } 
+                    });
+                
+    
+
             }
         }
-    
+        markReservedSeats();
         openPopUpPay();
 
     })
     .catch(error => console.error('Error: ', error));
 }
-    
+
 function openPopUpPay() {
     var nameInput = document.querySelector('input[name="name-lastname_input"]');
     var emailInput = document.querySelector('input[name="email_input"]');
@@ -101,7 +143,8 @@ function openPopUpPay() {
         
         if (selectedSeats.length > 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
             overlay.classList.add('active');
-            // reservation();
+            reservation();
+            clearSelectedSeatsAndTickets();
         }else if (selectedSeats.length === 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
             alert("Por favor, selecciona alguna butaca.");
         }else {
@@ -116,15 +159,54 @@ function openPopUpPay() {
 
 
 
-// function reservation() {
-//     fetch(`http://localhost:3000/shows/${idParam}`)
-// }
+function clearSelectedSeatsAndTickets() {
+    const selectedSeats = document.querySelectorAll('.seat.selected');
+    const containerTickets = document.getElementById('selected-tickets');
+
+    selectedSeats.forEach(seat => {
+        seat.classList.remove('selected');
+    });
+
+    const selectedTickets = containerTickets.querySelectorAll('.individual-ticket');
+    selectedTickets.forEach(ticket => {
+        containerTickets.removeChild(ticket);
+    });
+    createAD();
+
+    document.getElementById("details-show__total-price").textContent = "0.00";
+    document.querySelector('input[name="name-lastname_input"]').value = "";
+    document.querySelector('input[name="email_input"]').value = "";
+    document.querySelector('input[name="mobile-phone_input"]').value = "";
+    document.querySelector('input[name="titular_input"]').value = "";
+    document.querySelector('input[name="credit-card_input"]').value = "";
+    document.querySelector('input[name="date_input"]').value = "";
+    document.querySelector('input[name="CVV_input"]').value = "";
+}
 
 
+function reservation() {
+    const selectedSeats = document.querySelectorAll('.seat.selected');
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let idParam = urlParams.get("id");
 
 
-
-
+    fetch(`http://localhost:3000/shows/${idParam}/reserved-seats`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ seats: Array.from(selectedSeats).map(seat => parseInt(seat.textContent)) }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        selectedSeats.forEach(seatItem => {
+            seatItem.classList.toggle('reserved');
+            seatItem.style.cursor = 'default'; 
+        });    
+    })
+    .catch(error => console.error('Error al enviar la solicitud:', error));
+}
 
 
 

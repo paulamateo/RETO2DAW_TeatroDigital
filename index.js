@@ -62,6 +62,39 @@ app.get('/genres', (req, res) => {
 });
 
 
+//Peticion GET para obtener 
+
+
+
+// Peticion POST/PUT para guardar las butacas ocupadas
+app.post('/shows/:id/reserved-seats', (req, res) => {
+  const showId = parseInt(req.params.id);
+  const selectedSeats = req.body.seats;
+
+  // Filtra la obra por ID en el array
+  const matchingShows = shows.filter(show => show.id === showId);
+
+  if (matchingShows.length > 0) {
+      // Filtra los nuevos asientos reservados que no están en el array existente
+      const uniqueReservedSeats = selectedSeats.filter(seat => !matchingShows[0].reservedSeats.includes(seat));
+
+      // Actualiza la información de las butacas reservadas en la obra
+      matchingShows[0].reservedSeats = matchingShows[0].reservedSeats.concat(uniqueReservedSeats);
+
+      // Guarda la información actualizada en el archivo JSON
+      fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
+
+      res.status(200).send({ reservedSeats: matchingShows[0].reservedSeats });
+  } else {
+      res.sendStatus(404);
+  }
+});
+
+
+
+
+
+
 app.listen(port, () => {
   loadShowsToJson();
   console.log(`App listening on port ${port}`);

@@ -1,89 +1,176 @@
-.calendar {
-    margin: 50px 120px;
-    display: flex;
-    gap: 40px;
+.show-item {
+    padding: 20px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    position: relative;
 }
 
-h2 {
-    margin: 0;
+.info-panel {
+    /* display: flex;
+    justify-content: space-between; */
+    font-size: 13px;
 }
 
-.events-panel {
-    background-color: #f2f2f2;
-    color: black;
-    width: 20%;
-    padding: 30px;
-}
-
-.events-panel p {
-    margin-top: 20px;
-    font-size: 12px;
-}
-
-.calendar-panel {
-    text-align: center;
-    width: 80%;
-}
-
-
-.dot {
-    display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    margin: 0 auto;
-  }
-
-
-
-
-
-.month {
-    display: flex;
-    padding: 5px;
-    justify-content: space-between;
-    align-items: center;
+.buy-tickets__button {
+    all: unset;
     background-color: #b20000;
     color: white;
-    font-family: 'GothamLight', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-}
-
-
-
-.days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-}
-
-
-.day {
-    padding: 20px;
-    /* width: 100px; */
-    border: 1px solid #ddd;
-    background-color: #fff;
-    font-size: 14px;
-}
-
-
-
-.weekDay {
+    font-size: 10px;
     padding: 10px;
-    background-color: black;
-    color: white;
-    font-size: 12px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
 }
 
+.image-container {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.img-events-panel {
+    max-width: 100%;
+    height: auto;
+}
+
+.no-events {
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    padding: 10px;
+}
 
 .arrow {
     cursor: pointer;
-    padding: 15px;
+    margin-right: 5px;
+}
+
+.no-hover:hover {
+    background-color: white;
+    color: #ccc;
+} 
+
+.different-hover:hover {
+    background-color: #b20000;
+    color: white;
+}
+
+.shows-list {
+    display: flex;
+    align-items: center;
+}
+
+.show-line {
+    flex-grow: 1;
+    height: 3px;
+    background-color: #b0802c;
+}
+
+.next-month-day, .prev-month-day {
+    color: #ccc;
 }
 
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-.prevMonth, .nextMonth {
-    color: #cccccc;
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+}
+
+th {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    font-size: 12px;
+}
+
+td:hover {
+    background-color: #e4e4e4;
+}
+
+.day-cell-content {
+    display: flex;
+    flex-direction: column;
+}
+
+span {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.month-header {
+    font-family: 'GothamBook', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 20px;
+    background-color: #b20000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-header h3 {
+    margin: 0;
+}
+
+.month-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-day {
+    background-color: #b20000; 
+    color: white;
+}
+
+/* .container-calendar-events {
+    margin: 50px 100px;
+} */
+
+#calendar-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+#date-panel {
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+@media (min-width: 890px) {
+    .container-calendar-events {
+        margin: 50px 120px;
+        display: flex;
+        gap: 40px;
+    }
+
+    #calendar-container {
+        width: 75%;
+    }
+    
+    #date-panel {
+        width: 25%;
+        margin-top: 0;
+    }
+
+}
+
+@media (min-width: 990px) {
+    .info-panel {
+        display: flex;
+        justify-content: space-between;
+    }
 }
