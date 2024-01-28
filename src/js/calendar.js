@@ -116,9 +116,7 @@ window.onload = function () {
                 calendarContainer.appendChild(createMonthHeader(year, month));
                 calendarContainer.appendChild(calendarTable);
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            .catch(error => console.error('Error:', error));
     }
 
 

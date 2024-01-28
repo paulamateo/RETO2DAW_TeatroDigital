@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = function () {
     document.addEventListener('scroll', changeMenuStyleOnScroll);
     displayIconMenuResponsive();
     scrollToShowsSection();
@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             })
         })
-        .catch(error => console.error('Error fetching genre:', error));
-});
+        .catch(error => console.error('Error:', error));
+}
 
 
+//(Responsive) Cambio de logos blanco y negro
 function changeMenuStyleOnScroll() {
     var header = document.getElementById('header');
     var headerPopup = document.getElementById('header__popup');
@@ -43,7 +44,7 @@ function changeMenuStyleOnScroll() {
         logoImage.src = '../img/elements/logo_blanco.png';
         searchContainer.classList.add('scrolled');
         headerPopup.classList.add('scrolled');
-    } else {
+    }else {
         header.classList.remove('scrolled');
         logoImage.src = '../img/elements/logo_negro.png';
         searchContainer.classList.remove('scrolled');
@@ -51,6 +52,7 @@ function changeMenuStyleOnScroll() {
     }
 }
 
+//(Responsive) Icono menú hamburguesa
 function displayIconMenuResponsive() {
     var hamburgerIcon = document.getElementById('list-icon');
     var headerPopup = document.getElementById('header__popup');
@@ -60,6 +62,7 @@ function displayIconMenuResponsive() {
     })
 }
 
+//Botón para ir a la sección de musicales
 function scrollToShowsSection() {
     var arrowIcon = document.getElementById('chevronleft-icon');
     var showsSection = document.querySelector('.shows');
