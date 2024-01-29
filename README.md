@@ -4,8 +4,7 @@ Para el proyecto, se ha creado el teatro digital "Risas y Tragedias", especializ
 
 Una característica destacada de esta plataforma es la posibilidad de interactuar con un panel de asientos, donde los usuarios pueden visualizar los asientos reservados y seleccionar aquellos que estén disponibles para su elección. Este enfoque intuitivo facilita a los espectadores la elección de butacas para disfrutar de las obras clásicas ofrecidas por el teatro digital "Risas y Tragedias".
 
-
-## 2.- Objetivos del proyecto
+## <br>2.- Objetivos del proyecto
 La propuesta “Del Diseño a la Realidad Digital: Tu Creatividad, Nuestra Guía” está
 pensada para desafiar a los estudiantes en el desarrollo de habilidades técnicas y de
 colaboración, con el fin de lograr un producto que no solo cumpla con los requisitos
@@ -31,24 +30,14 @@ de una etapa cerrará la entrega de las siguientes fases.
 El alumnado solo podrá presentarse a la prueba de autoría y a la presentación ante tribunal
 siempre y cuando haya entregado todas las fases en su fecha correspondiente.
 
-**ETAPA 1: ANÁLISIS Y DISEÑO (30%)**
-- Elaborar la guía de estilo con branding y especificaciones para desarrolladores.
-- Diseñar prototipos interactivos en Figma.
+| ETAPA 1: <br>Análisis y diseño | ETAPA 2: <br>Codificación | ETAPA 3: <br>Despliegue en la nube | ETAPA 4: <br>Prueba de autoría y exposición
+| ------------- | ------------- | ------------- | ------------- |
+| - Elaborar la guía de estilo con branding y especificaciones para desarrolladores. <br> - Diseñar prototipos interactivos en Figma.| - **Front-End:** Maquetación HTML + CSS con precompilado Sass, con enfoque _responsive_ y _Mobile First_. <br>- **Front-End:** Programación con JavaScript puro Vanilla.js: Interactividad y consumo de APIS.<br>- **Back-End:** Consumir un API Rest utilizando Node con Express.js.| - Contenerización en local del front (web HTML) y del back API (Node). <br>- Despliegue del front-end en AWS S3. <br>- Despliegue del back-end y configuración de la API en AWS siguiendo una arquitectura de capas en un EC2. <br>- Publicar y registro en DNS público.| Demostración y defensa del proyecto completo ante un tribunal educativo. |
+| 30% | 40% | 15% | 15% |
 
-**ETAPA 2: CODIFICACIÓN (40%)**
-- **Front-End:** Maquetación HTML + CSS con precompilado Sass, con enfoque _responsive_ y
-_Mobile First_.
-- **Front-End:** Programación con JavaScript puro Vanilla.js: Interactividad y consumo de APIS.
-- **Back-End:** Consumir un API Rest utilizando Node con Express.js.
+## <br>3.- API
+Para iniciar la API, es necesario lanzar el siguiente comando en la terminal:
 
-**ETAPA 3: DESPLIEGUE EN LA NUBE (15%)**
-- Contenerización en local del front (web HTML) y del back API (Node).
-- Despliegue del front-end en AWS S3.
-- Despliegue del back-end y configuración de la API en AWS siguiendo una
-arquitectura de capas en un EC2.
-- Publicar y registro en DNS público.
+    npm start
 
-**ETAPA 4: PRUEBA DE AUTORÍA Y EXPOSICIÓN (15%)**
-- Demostración y defensa del proyecto completo ante un tribunal educativo.
-
-## 3.- Testeo de la API mediante Hoppscotch 
+### 3.1.- Testeo mediante Hoppscotch 
