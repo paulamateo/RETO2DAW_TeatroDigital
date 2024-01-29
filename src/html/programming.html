@@ -7,10 +7,12 @@
     <link rel="shortcut icon" href="../img/elements/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/elements.css">
     <link rel="stylesheet" href="../css/programming.css">
-    <link rel="stylesheet" href="../css/calendar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@200;300;400&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -82,94 +84,10 @@
         <div class="banner banner--programming">
             <h1>PROGRAMACIÓN</h1>
         </div>
-
-        <section class="calendar">
-            <div class="calendar-panel" id="calendar-panel"></div>
-            <div class="events-panel" id="events-panel"></div>
-        </section>
-
-<!-- 
-        <section class="shows">
-            <div class="shows__rectangle">
-                <h2>DICIEMBRE</h2>
-            </div>
-            <div class="shows__grid shows__grid--columns">
-                <div class="grid-item grid-item--image-1">
-                    <div class="date">
-                        <p class="date__day">15</p>
-                        <p class="date__month">DIC</p>
-                    </div>
-                    <h2>Romeo y Julieta</h2>
-                    <button class="button button--programming" type="submit" id="button-show-7">VER ENTRADAS</button>
-                </div>
-                <div class="grid-item grid-item--image-2">
-                    <div class="date">
-                        <p class="date__day">20</p>
-                        <p class="date__month">DIC</p>
-                    </div>
-                    <h2>Macbeth</h2>
-                    <button class="button button--programming" type="submit" id="button-show-2">VER ENTRADAS</button>
-                </div>
-                <div class="grid-item grid-item--image-3">
-                    <div class="date">
-                        <p class="date__day">29</p>
-                        <p class="date__month">DIC</p>
-                    </div>
-                    <h2>Hamlet</h2>
-                    <button class="button button--programming" type="submit" id="button-show-3">VER ENTRADAS</button>
-                </div>
-            </div>
-            <div class="shows__rectangle">
-                <h2>ENERO</h2>
-            </div>
-            <div class="shows__grid shows__grid--columns">
-                <div class="grid-item grid-item--image-4">
-                    <div class="date">
-                        <p class="date__day">10</p>
-                        <p class="date__month">ENE</p>
-                    </div>
-                    <h2>El Cascanueces</h2>
-                    <button class="button button--programming" type="submit" id="button-show-4">VER ENTRADAS</button>
-                </div>
-                <div class="grid-item grid-item--image-5">
-                    <div class="date">
-                        <p class="date__day">15</p>
-                        <p class="date__month">ENE</p>
-                    </div>
-                    <h2>Divina Comedia</h2>
-                    <button class="button button--programming" type="submit" id="button-show-5">VER ENTRADAS</button>
-                </div>
-            </div>
-            <div class="shows__rectangle">
-                <h2>FEBRERO</h2>
-            </div>
-            <div class="shows__grid shows__grid--columns">
-                <div class="grid-item grid-item--image-6">
-                    <div class="date">
-                        <p class="date__day">2</p>
-                        <p class="date__month">FEB</p>
-                    </div>
-                    <h2>Edipo Rey</h2>
-                    <button class="button button--programming" type="submit" id="button-show-6">VER ENTRADAS</button>
-                </div>
-                <div class="grid-item grid-item--image-7">
-                    <div class="date">
-                        <p class="date__day">16</p>
-                        <p class="date__month">FEB</p>
-                    </div>
-                    <h2>El Fantasma de la Ópera</h2>
-                    <button class="button button--programming" type="submit" id="button-show-1">VER ENTRADAS</button>
-                </div>
-                <div class="grid-item grid-item--image-8">
-                    <div class="date">
-                        <p class="date__day">25</p>
-                        <p class="date__month">FEB</p>
-                    </div>
-                    <h2>Bodas de Sangre</h2>
-                    <button class="button button--programming" type="submit" id="button-show-8">VER ENTRADAS</button>
-                </div>
-            </div>
-        </section> -->
+        <div class="container-calendar-events">
+            <div class="calendar-container" id="calendar-container"></div>
+            <div class="date-panel" id="date-panel"></div>
+        </div>
     </main>
 
     <footer class="footer">

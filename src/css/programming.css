@@ -1,101 +1,204 @@
 .banner--programming {
-    background-image: url(../img/elements/banner_programming.jpg);
-  }
+  background-image: url(../img/elements/banner_programming.jpg);
+}
+.banner--programming h1 {
+  padding-top: 70px;
+}
 
-  .banner--programming h1 {
-    padding-top: 70px;
+.weekday-panel {
+  text-align: center;
+}
+
+.info-panel {
+  display: flex;
+  font-size: 13px;
+}
+.info-panel p {
+  margin: 0;
+  margin-top: 15px;
+}
+
+.show-item {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.buy-tickets__button {
+  all: unset;
+  background-color: #b20000;
+  color: white;
+  font-size: 10px;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.img-events-panel {
+  max-width: 100%;
+  height: auto;
+}
+
+.no-events {
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.arrow {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.no-hover:hover {
+  background-color: white;
+  color: #ccc;
+}
+
+.different-hover:hover {
+  background-color: #b20000;
+  color: white;
+}
+
+.shows-list {
+  display: flex;
+  align-items: center;
+}
+
+.show-line {
+  height: 3px;
+  background-color: #b0802c;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.next-month-day, .prev-month-day {
+  color: #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  position: relative;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #cfcfcf;
+  cursor: pointer;
+}
+
+th {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  font-size: 12px;
+}
+
+td:hover {
+  background-color: #e4e4e4;
+}
+
+.day-cell-content {
+  display: flex;
+  flex-direction: column;
+}
+
+span {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.month-header {
+  font-family: "GothamBook", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  padding: 20px;
+  background-color: #b20000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.month-header h3 {
+  margin: 0;
+}
+
+.month-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-day {
+  background-color: #b20000;
+  color: white;
+}
+
+.container-calendar-events {
+  margin: 40px 20px;
+}
+
+.calendar-container {
+  width: 100%;
+  overflow: hidden;
+  font-size: 10px;
+}
+
+.date-panel {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.info-panel__name {
+  font-weight: 600;
+  padding-left: 20px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 600px) {
+  .container-calendar-events {
+    margin: 50px 100px;
   }
-  
-  .date {
-    background-color: #b0802c;
-    width: 60px;
-    line-height: 2px;
-    position: absolute;
-    top: 0;
-    left: 40px;
-  }
-  .date__day {
-    font-weight: 600;
-    font-size: 20px;
-  }
-  .date__month {
-    font-size: 15px;
-  }
-  
-  .shows__rectangle {
-    background-color: #b20000;
-    text-align: center;
-    color: white;
-    font-weight: 300;
-    padding: 10px;
-  }
-  .shows__rectangle h2 {
-    font-family: "GothamLight", sans-serif;
-    letter-spacing: 0.15em;
-  }
-  
-  .shows__grid {
-    margin: 50px;
-    color: white;
-    font-weight: 400;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 30px;
-  }
-  
-  .button--programming {
-    margin-top: 20px;
-  }
-  
-  .grid-item {
-    color: white;
+}
+@media (min-width: 990px) {
+  .container-calendar-events {
+    margin: 50px 120px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 400px;
+    gap: 40px;
   }
-  .grid-item h2 {
-    font-family: "GothamLight", sans-serif;
-    letter-spacing: 0.15em;
-    margin: 0 20px 0 20px;
+  #calendar-container {
+    width: 75%;
+    font-size: 14px;
   }
-  .grid-item__button:hover {
-    background-color: #b0802c;
+  #date-panel {
+    width: 25%;
+    margin-top: 0;
   }
-  .grid-item--image-1 {
-    background-image: url(../img/romeoandjuliet.jpeg);
+}
+@media (min-width: 1090px) {
+  .info-panel {
+    display: flex;
   }
-  .grid-item--image-2 {
-    background-image: url(../img/macbeth.jpeg);
-  }
-  .grid-item--image-3 {
-    background-image: url(../img/hamlet.jpeg);
-  }
-  .grid-item--image-4 {
-    background-image: url(../img/thenutcracker.jpeg);
-  }
-  .grid-item--image-5 {
-    background-image: url(../img/thedivinecomedy.jpeg);
-  }
-  .grid-item--image-6 {
-    background-image: url(../img/oedipustheking.jpeg);
-  }
-  .grid-item--image-7 {
-    background-image: url(../img/thephantomoftheopera.jpeg);
-  }
-  .grid-item--image-8 {
-    background-image: url(../img/homepage_show2.jpg);
-  }
-  
-  @media screen and (min-width: 990px) {
-    .shows__grid--columns {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 400px;
-      grid-gap: 30px;
-    }
-  }
+}
+
+/*# sourceMappingURL=programming.css.map */

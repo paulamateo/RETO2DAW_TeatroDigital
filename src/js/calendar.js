@@ -1,106 +1,225 @@
+window.onload = function () {
+    const calendarContainer = document.getElementById('calendar-container');
+    const datePanel = document.getElementById('date-panel');
 
-const calendarElement = document.getElementById('calendar-panel');
-const eventPanel = document.getElementById('events-panel');
+    function generateCalendar(year, month) {
+        fetch('http://localhost:3000/shows')
+            .then(response => response.json())
+            .then(data => {
+                const showsData = data.map(show => ({
+                    id: show.id,
+                    name: show.title,
+                    date: new Date(show.date),
+                    scene: show.scene
+                }));
 
+                const showsByDate = {};
 
-function generateCalendar(year, month) {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const daysInLastMonth = new Date(year, month, 0).getDate();
-    const lastMonthStartDay = daysInLastMonth - firstDayOfMonth + 2;
+                showsData.forEach(show => {
+                    const dayKey = `${show.date.getFullYear()}-${show.date.getMonth() + 1}-${show.date.getDate()}`;
+                    if (!showsByDate[dayKey]) {
+                        showsByDate[dayKey] = [];
+                    }
+                    showsByDate[dayKey].push(show);
+                });
 
-    const totalCells = 35;
-    const daysToAddFromNextMonth = totalCells - (daysInMonth + firstDayOfMonth - 1);
+                const calendarTable = document.createElement('table');
 
-    const calendarHTML = `
-        <div class="month">
-            <svg class="arrow" onclick="prevMonth(${year}, ${month})" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
-            <h2>${getMonthName(month)} ${year}</h2>
-            <svg class="arrow" onclick="nextMonth(${year}, ${month})" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-        </div>
-        <div class="days">
-            ${generateWeekDays()}
-            ${generateDays(lastMonthStartDay, daysInLastMonth, 'prevMonth')}
-            ${generateDays(1, daysInMonth)}
-            ${generateDays(1, daysToAddFromNextMonth, 'nextMonth')}
-        </div>
-    `;
+                //Fila días de la semana
+                const daysOfWeek = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+                const headerRow = document.createElement('tr');
 
-    calendarElement.innerHTML = calendarHTML;
-}
+                daysOfWeek.forEach(day => {
+                    const dayHeader = document.createElement('th');
+                    dayHeader.textContent = day;
+                    headerRow.appendChild(dayHeader);
+                });
 
+                calendarTable.appendChild(headerRow);
 
+                const firstDayOfMonth = new Date(year, month - 1, 1).getDay();
+                const daysInMonth = new Date(year, month, 0).getDate();
+                const currentDate = new Date();
 
-function generateWeekDays() {
-    const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-    let html = '';
+                let dayCounter = 1;
 
-    weekDays.forEach(day => {
-        html += `<div class="weekDay">${day}</div>`;
-    });
+                //Filas del mes correspondiente
+                for (let i = 0; i < 5; i++) {
+                    const row = document.createElement('tr');
 
-    return html;
-}
+                    for (let j = 0; j < 7; j++) {
+                        const cell = document.createElement('td');
 
-function generateDays(startDay, totalDays, cssClass = '') {
-    let html = '';
-    for (let day = startDay; day <= totalDays; day++) {
-        html += `<div class="day ${cssClass}">${day}</div>`;
+                        if (i === 0 && j < firstDayOfMonth - 1) {
+                            // Días anteriores al mes
+                            const prevMonthDays = new Date(year, month - 1, 0).getDate();
+                            const prevMonthDay = prevMonthDays - (firstDayOfMonth - 1 - j) + 1;
+                            cell.textContent = prevMonthDay;
+                            cell.classList.add('prev-month-day', 'no-hover');
+                        }else if (dayCounter <= daysInMonth) {
+                            // Días del mes actual
+                            const dayKey = `${year}-${month}-${dayCounter}`;
+                            const dayShows = showsByDate[dayKey] || [];
+
+                            const dayCellContent = document.createElement('div');
+                            dayCellContent.classList.add('day-cell-content');
+
+                            const dayNumber = document.createElement('span');
+                            dayNumber.textContent = dayCounter;
+
+                            const showsList = document.createElement('div');
+                            showsList.classList.add('shows-list');
+
+                            if (dayShows.length > 0) {
+                                const showLine = document.createElement('div');
+                                showLine.classList.add('show-line');
+                                showsList.appendChild(showLine);
+                            }
+
+                            dayCellContent.appendChild(dayNumber);
+                            dayCellContent.appendChild(showsList);
+                            cell.appendChild(dayCellContent);
+
+                            //Día actual
+                            if (currentDate.getFullYear() === year && currentDate.getMonth() + 1 === month && dayCounter === currentDate.getDate()) {
+                                cell.classList.add('current-day', 'different-hover');
+                            }
+
+                            dayCounter++;
+
+                        }else {
+                            // Días posteriores al mes
+                            const nextMonthDay = dayCounter - daysInMonth;
+                            cell.textContent = nextMonthDay;
+                            cell.classList.add('next-month-day', 'no-hover');
+                            dayCounter++;
+                        }
+
+                        row.appendChild(cell);
+
+                        //Evento (click) para cada celda. Actualización del panel
+                        if (!cell.classList.contains('prev-month-day') && !cell.classList.contains('next-month-day')) {
+                            cell.addEventListener('click', function () {
+                                const clickedDate = new Date(year, month - 1, parseInt(cell.textContent));
+                                const dayKey = `${clickedDate.getFullYear()}-${clickedDate.getMonth() + 1}-${clickedDate.getDate()}`;
+                                const dayShows = showsByDate[dayKey] || [];
+                                updateDatePanel(clickedDate, dayShows);
+                            });
+                        }
+
+                    }
+
+                    calendarTable.appendChild(row);
+                }
+
+                calendarContainer.innerHTML = '';
+                calendarContainer.appendChild(createMonthHeader(year, month));
+                calendarContainer.appendChild(calendarTable);
+            })
+            .catch(error => console.error('Error:', error));
     }
-    return html;
-}
 
-function getMonthName(month) {
-    const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-    return months[month];
-}
 
-function prevMonth(year, month) {
-    if (month === 0) {
-        generateCalendar(year - 1, 11);
-    } else {
-        generateCalendar(year, month - 1);
+    //Cabecera del calendario (mes + botones)
+    function createMonthHeader(year, month) {
+        const monthHeader = document.createElement('div');
+        monthHeader.classList.add('month-header');
+
+        //Mes actual
+        const monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
+        monthHeader.innerHTML = `<h3>${monthName} ${year}</h3>`;
+
+        //Botones para cambiar de mes
+        const monthNavigation = document.createElement('div');
+        monthNavigation.classList.add('month-navigation');
+
+        const prevMonthButton = document.createElement('div');
+        prevMonthButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="arrow" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                    </svg>`;
+
+        prevMonthButton.addEventListener('click', () => {
+            const newMonth = month === 1 ? 12 : month - 1;
+            const newYear = month === 1 ? year - 1 : year;
+            generateCalendar(newYear, newMonth);
+        });
+
+        const nextMonthButton = document.createElement('div');
+        nextMonthButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="arrow" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                    </svg>`;
+
+        nextMonthButton.addEventListener('click', () => {
+            const newMonth = month === 12 ? 1 : month + 1;
+            const newYear = month === 12 ? year + 1 : year;
+            generateCalendar(newYear, newMonth);
+        });
+
+        monthNavigation.appendChild(prevMonthButton);
+        monthNavigation.appendChild(nextMonthButton);
+
+        monthHeader.appendChild(monthNavigation);
+
+        return monthHeader;
     }
-}
 
-function nextMonth(year, month) {
-    if (month === 11) {
-        generateCalendar(year + 1, 0);
-    } else {
-        generateCalendar(year, month + 1);
+
+    //Panel de eventos
+    function updateDatePanel(date, shows) {
+        //Día actual o celda escogida
+        const weekdayName = date.toLocaleDateString('default', { weekday: 'long' });
+        const capitalizedWeekday = weekdayName.charAt(0).toUpperCase() + weekdayName.slice(1);
+        const monthName = date.toLocaleString('default', { month: 'long' });
+        datePanel.innerHTML = `<h3 class="weekday-panel">${capitalizedWeekday}, ${date.getDate()} de ${monthName} de ${date.getFullYear()}</h3>`;    
+
+        //Obras
+        if (shows.length > 0) {
+            const showsList = document.createElement('div');
+            shows.forEach(show => {
+                const showItem = document.createElement('div');
+                showItem.classList.add('show-item');
+
+                const showDateTime = new Date(show.date);
+                const showTime = showDateTime.toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
+
+                showItem.innerHTML = `
+                    <div class="image-container">
+                        <img class="img-events-panel" src="${show.scene}"/>
+                        <button class="buy-tickets__button">COMPRAR</button>
+                    </div>
+                    <div class="info-panel">
+                        <p>${showTime}h</p>
+                        <p class="info-panel__name">${show.name}<p>
+                    </div>
+                `;
+
+                showsList.appendChild(showItem);
+
+                let button_image_show = showItem.querySelector('.buy-tickets__button');
+                button_image_show.addEventListener('click', function() {
+                    window.location.href = `show.html?title=${show.title}&id=${show.id}`;
+                })
+
+            });
+
+            datePanel.appendChild(showsList);
+        } else {
+            datePanel.innerHTML += `
+                <div class="no-events">
+                    <p>No hay ningún espectáculo programado para hoy.</p>
+                </div>
+            `;
+        }
     }
+
+
+    //Mostrar calendario
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
+    generateCalendar(currentYear, currentMonth);
+
+
+    //Actualizar el panel con la fecha actual
+    updateDatePanel(currentDate, []);
 }
-
-const currentDate = new Date();
-generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
-
-// function renderEventPanel(date, events) {
-//     eventPanel.innerHTML = '';
-//     const formattedDate = ` ${getDayOfWeek(date.getDay())}, ${date.getDate()} de ${getMonthName(date.getMonth())} de ${date.getFullYear()}`;
-//     const title = document.createElement('h2');
-//     title.textContent = `${formattedDate}`;
-//     eventPanel.appendChild(title);
-
-//     if (events && events.length > 0) {
-//         const eventList = document.createElement('ul');
-//         events.forEach(event => {
-//             const listItem = document.createElement('li');
-//             listItem.textContent = event;
-//             eventList.appendChild(listItem);
-//         });
-//         eventPanel.appendChild(eventList);
-//     } else {
-//         const noEventsMessage = document.createElement('p');
-//         noEventsMessage.textContent = 'No hay ningún espectáculo programado.';
-//         eventPanel.appendChild(noEventsMessage);
-//     }
-// }
-
-// function getDayOfWeek(day) {
-//     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-//     return daysOfWeek[day];
-// }
-
-
-
-renderEventPanel(currentDate);
