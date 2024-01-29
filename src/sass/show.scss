@@ -9,55 +9,6 @@ $trash-color: red;
 $icon-color: #c3c3c3;
 
 
-.overlay {
-    background-color: rgba(1, 1, 1, 0);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    visibility: hidden;
-    z-index: 3;
-    backdrop-filter: blur(7px);
-    opacity: 0;
-    transition: background-color 0.9s ease;
-
-    &.active {
-        visibility: visible;
-        opacity: 1;
-        background-color: rgba(1, 1, 1, 0.5);
-    }
-}
-
-.popup-purchase {
-    position: fixed;
-    color: $details-color;
-    background-color: $font-color;
-    z-index: 100;
-    top: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: justify;
-}
-
-.x-icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 10px 10px 0 0;
-    cursor: pointer;
-}
-
-.container-icon {
-    display: flex;
-    justify-content: center;
-    margin: 0 0 20px 0;
-}
-
 .popup-overview {
     position: fixed;
     border: 3px solid $details-color;
@@ -96,35 +47,111 @@ $icon-color: #c3c3c3;
     }
 }
 
-.tick-element {
-    max-width: 70px;
-    margin: 0 auto;
+.tickets {
+    border: 2px dashed $font-color;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    p {
+        font-size: 10px;
+        color: $font-color;
+        text-align: center;
+    }
 }
 
-.circ {
-    opacity: 0;
-    stroke-dasharray: 130;
-    stroke-dashoffset: 130;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    -ms-transition: all 1s;
-    -o-transition: all 1s;
-    transition: all 1s;
+.individual-ticket {
+    font-size: 10px;
+    color: $details-color;
+    background-color: $font-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 0 0 10px 0;
+    position: relative;
+
+    p {
+        margin: 0;
+    }
+
+    &__data {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
-.tick {
-    stroke-dasharray: 50;
-    stroke-dashoffset: 50;
-    -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
-    -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
-    -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
-    -o-transition: stroke-dashoffset 1s 0.5s ease-out;
-    transition: stroke-dashoffset 1s 0.5s ease-out;
+.selected-tickets {
+    margin-bottom: 20px;
 }
 
-.drawn + svg .path{
-    opacity: 1;
-    stroke-dashoffset: 0;
+.trash-icon {
+    color: $trash-color;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px 10px 0 0;
+}
+
+.panel-payment {
+    background-color: $details-color;
+    color: $font-color;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 0 0 30px 0;
+
+    h3 {
+        margin-top: 0;
+        text-align: center;
+    }
+}
+
+.panel-box {
+    position: relative;
+    color: $panel-box;
+    width: 100%;
+
+    &-double {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.icon-panel {
+    position: absolute;
+    color: $icon-color;
+    left: 15px;
+    top: 8px;
+}
+
+.input-payment-panel {
+    width: calc(100% - 20px);
+    border: none;
+    background-color: $font-color;
+    padding: 10px;
+    margin: 0 0 15px 0;
+    border-radius: 20px;
+    font-family: "Inter", sans-serif;
+    text-indent: 40px;
+    outline: none;
+    font-size: 12px;
+
+    &::placeholder {
+        color: $icon-color;
+    }
+}
+
+.button-pay {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin: 0;
 }
 
 .banner--show {
@@ -224,12 +251,21 @@ $icon-color: #c3c3c3;
         display: flex;
     }
 
-    .selected {
+    &-deleted {
+        width: 2.5vw;
+        height: 2.5vw;
+        background-color: $panel-seats;
+        border-radius: 5px;
+        border: 2px solid $panel-seats;
+        margin: 0.7vw;
+    }
+
+    &.selected {
         background-color: $seat-selected;
         border: 2px solid $seat-selected;
     }
 
-    .reserved {
+    &.reserved {
         background-color: $seat-reserved;
         border: 2px solid $seat-reserved;
     }
@@ -237,6 +273,23 @@ $icon-color: #c3c3c3;
 
 .key {
     display: flex;
+}
+
+.square {
+    padding: 5px;
+    border-radius: 2px;
+
+    &--colour-selected {
+        background-color: $seat-selected;
+    }
+
+    &--colour-disponible {
+        background-color: $seat-disponible;
+    }
+
+    &--colour-no-disponible {
+        background-color: $seat-reserved;
+    }
 }
 
 .option-key {
@@ -253,111 +306,84 @@ $icon-color: #c3c3c3;
     }
 }
 
-.panel-payment {
-    background-color: $details-color;
-    color: $font-color;
-    border-radius: 20px;
-    padding: 40px;
-    margin: 0 0 30px 0;
-
-    h3 {
-        margin-top: 0;
-        text-align: center;
-    }
+.tick-element {
+    max-width: 70px;
+    margin: 0 auto;
 }
 
-.panel-box {
-    position: relative;
-    color: $panel-box;
-    width: 100%;
-
-    &-double {
-        display: flex;
-        gap: 20px;
-    }
+.circ {
+    opacity: 0;
+    stroke-dasharray: 130;
+    stroke-dashoffset: 130;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
 }
 
-.icon-panel {
-    position: absolute;
-    color: $icon-color;
-    left: 15px;
-    top: 8px;
+.tick {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -o-transition: stroke-dashoffset 1s 0.5s ease-out;
+    transition: stroke-dashoffset 1s 0.5s ease-out;
 }
 
-.input-payment-panel {
-    width: calc(100% - 20px);
-    border: none;
-    background-color: $font-color;
-    padding: 10px;
-    margin: 0 0 15px 0;
-    border-radius: 20px;
-    font-family: "Inter", sans-serif;
-    text-indent: 40px;
-    outline: none;
-    font-size: 12px;
-
-    &::placeholder {
-        color: $icon-color;
-    }
+.drawn + svg .path{
+    opacity: 1;
+    stroke-dashoffset: 0;
 }
 
-.button-pay {
-    display: flex;
+.overlay {
+    background-color: rgba(1, 1, 1, 0);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     align-items: center;
-    justify-content: right;
-}
-
-.price {
+    justify-content: center;
     display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    margin: 0;
-}
+    visibility: hidden;
+    z-index: 3;
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    transition: background-color 0.9s ease;
 
-.tickets {
-    border: 2px dashed $font-color;
-    padding: 10px;
-    margin-bottom: 20px;
-
-    p {
-        font-size: 10px;
-        color: $font-color;
-        text-align: center;
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        background-color: rgba(1, 1, 1, 0.5);
     }
 }
 
-.individual-ticket {
-    font-size: 10px;
+.popup-purchase {
+    position: fixed;
     color: $details-color;
     background-color: $font-color;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    margin: 0 0 10px 0;
-    position: relative;
-
-    p {
-        margin: 0;
-    }
-
-    &__data {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-.selected-tickets {
-    margin-bottom: 20px;
-}
-
-.trash-icon {
-    color: $trash-color;
-    cursor: pointer;
-    position: absolute;
+    z-index: 100;
     top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: justify;
+}
+
+.x-icon {
+    position: absolute;
     right: 0;
+    top: 0;
     margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.container-icon {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px 0;
 }
 
 @media (min-width: 780px) {

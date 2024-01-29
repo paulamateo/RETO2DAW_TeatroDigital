@@ -147,46 +147,43 @@ window.onload = function() {
             }
 
             markReservedSeats();
-            openPopUpPay();
+            
+
+            //Abrir pop-up (y cerrar). "Alerts" para manejar excepciones en el formulario
+            var nameInput = document.querySelector('input[name="name-lastname_input"]');
+            var emailInput = document.querySelector('input[name="email_input"]');
+            var phoneInput = document.querySelector('input[name="mobile-phone_input"]');
+            var cardHolderInput = document.querySelector('input[name="titular_input"]');
+            var cardNumberInput = document.querySelector('input[name="credit-card_input"]');
+            var dateInput = document.querySelector('input[name="date_input"]');
+            var cvvInput = document.querySelector('input[name="CVV_input"]');
+
+            const overlay = document.getElementById('overlay');
+            const buttonPay = document.getElementById('payment-button');
+            const buttonClose = document.getElementById('button-close');
+            const trigger = document.getElementById('trigger');
+
+            buttonPay.addEventListener('click', function() {
+                const selectedSeats = document.querySelectorAll('.seat.selected');      
+                trigger.classList.add('drawn');
+                
+                if (selectedSeats.length > 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
+                    overlay.classList.add('active');
+                    reservation();
+                    clearSelectedSeatsAndTickets();
+                }else if (selectedSeats.length === 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
+                    alert("Por favor, selecciona alguna butaca.");
+                }else {
+                    alert("Por favor, completa todos los campos.");
+                }
+            });
+        
+            buttonClose.addEventListener('click', function() {
+                overlay.classList.remove('active');
+            })
 
         })
         .catch(error => console.error('Error: ', error));
-}
-
-
-//Abrir pop-up. "Alerts" para manejar excepciones en el formulario
-function openPopUpPay() {
-    var nameInput = document.querySelector('input[name="name-lastname_input"]');
-    var emailInput = document.querySelector('input[name="email_input"]');
-    var phoneInput = document.querySelector('input[name="mobile-phone_input"]');
-    var cardHolderInput = document.querySelector('input[name="titular_input"]');
-    var cardNumberInput = document.querySelector('input[name="credit-card_input"]');
-    var dateInput = document.querySelector('input[name="date_input"]');
-    var cvvInput = document.querySelector('input[name="CVV_input"]');
-
-    const overlay = document.getElementById('overlay');
-    const buttonPay = document.getElementById('payment-button');
-    const buttonClose = document.getElementById('button-close');
-    const trigger = document.getElementById('trigger');
-
-    buttonPay.addEventListener('click', function() {
-        const selectedSeats = document.querySelectorAll('.seat.selected');      
-        trigger.classList.add('drawn');
-        
-        if (selectedSeats.length > 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
-            overlay.classList.add('active');
-            reservation();
-            clearSelectedSeatsAndTickets();
-        }else if (selectedSeats.length === 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
-            alert("Por favor, selecciona alguna butaca.");
-        }else {
-            alert("Por favor, completa todos los campos.");
-        }
-    });
-
-    buttonClose.addEventListener('click', function() {
-        overlay.classList.remove('active');
-    })
 }
 
 
