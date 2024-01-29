@@ -234,10 +234,16 @@ function showDetails(show) {
     document.getElementById('details-show__director').textContent = show.director;
     document.getElementById('details-show__age').textContent = show.age;
     document.getElementById('details-show__length').textContent = show.length;
-    document.getElementById('details-show__day').textContent = show.date;
-    document.getElementById('details-show__hour').textContent = show.hour;
     document.getElementById('details-show__overview').textContent = show.overview;
 
+    const showDateTime = new Date(show.date);
+    const day = showDateTime.getDate().toString().padStart(2, '0');
+    const month = (showDateTime.getMonth() + 1).toString().padStart(2, '0');
+    const year = showDateTime.getFullYear();
+    const showTime = showDateTime.toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
+    
+    document.getElementById('details-show__day').textContent = `${day}/${month}/${year} | ${showTime}h`;
+    
     const button = document.getElementById('button-overview');
     const overview = document.getElementById('popup-overview');
     const closePopUp = document.getElementById('close-popup');

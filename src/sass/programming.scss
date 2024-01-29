@@ -91,9 +91,15 @@ $font-family-calendar: 'GothamBook', sans-serif;
 }
 
 .show-line {
-    flex-grow: 1;
     height: 3px;
     background-color: $line-color;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .next-month-day, .prev-month-day {
@@ -106,6 +112,7 @@ table {
 }
 
 th, td {
+    position: relative;
     padding: 15px;
     text-align: center;
     border: 1px solid $border-color-show;

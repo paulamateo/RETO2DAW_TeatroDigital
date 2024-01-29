@@ -9,7 +9,7 @@ window.onload = function () {
                 const showsData = data.map(show => ({
                     id: show.id,
                     name: show.title,
-                    date: new Date(show.date2),
+                    date: new Date(show.date),
                     scene: show.scene
                 }));
 
