@@ -1,9 +1,45 @@
-window.onload = function () {
-    document.addEventListener('scroll', changeMenuStyleOnScroll);
-    displayIconMenuResponsive();
-    scrollToShowsSection();
+document.addEventListener('DOMContentLoaded', () => {
+    //RESPONSIVE
+    //Icono menu hamburguesa
+    var hamburgerIcon = document.getElementById('list-icon');
+    var headerPopup = document.getElementById('header__popup');
+    
+    hamburgerIcon.addEventListener('click', function() {
+        headerPopup.classList.toggle('active');
+    })
 
-    let grid = document.getElementById('shows-grid__musical-genre');
+    //Cambio de logos blanco y negro
+    document.addEventListener('scroll', function() {
+        var header = document.getElementById('header');
+        var headerPopup = document.getElementById('header__popup');
+        var logoImage = document.getElementById('logoImage');
+        var searchContainer = document.getElementById('search');
+        var scrollPosition = window.scrollY;
+    
+        if (scrollPosition > 50) {
+            header.classList.add('scrolled');
+            logoImage.src = '../img/elements/logo_blanco.png';
+            searchContainer.classList.add('scrolled');
+            headerPopup.classList.add('scrolled');
+        }else {
+            header.classList.remove('scrolled');
+            logoImage.src = '../img/elements/logo_negro.png';
+            searchContainer.classList.remove('scrolled');
+            headerPopup.classList.remove('scrolled');
+        }
+    });
+
+
+    //SECCION DE MUSICALES
+    //Ir a la seccion 'Vive la magia musical'
+    var arrowIcon = document.getElementById('chevronleft-icon');
+    var showsSection = document.querySelector('.shows');
+    arrowIcon.addEventListener("click", function() {
+        showsSection.scrollIntoView({ behavior: 'smooth' });
+    })
+
+    //Cargar las obras que tienen el genero 'musical'
+    let grid = document.getElementById('shows-grid__musical-genre'); 
 
     fetch('http://localhost:3000/shows/genre/musical')
         .then(response => response.json())
@@ -28,45 +64,4 @@ window.onload = function () {
             })
         })
         .catch(error => console.error('Error:', error));
-}
-
-
-//(Responsive) Cambio de logos blanco y negro
-function changeMenuStyleOnScroll() {
-    var header = document.getElementById('header');
-    var headerPopup = document.getElementById('header__popup');
-    var logoImage = document.getElementById('logoImage');
-    var searchContainer = document.getElementById('search');
-    var scrollPosition = window.scrollY;
-
-    if (scrollPosition > 50) {
-        header.classList.add('scrolled');
-        logoImage.src = '../img/elements/logo_blanco.png';
-        searchContainer.classList.add('scrolled');
-        headerPopup.classList.add('scrolled');
-    }else {
-        header.classList.remove('scrolled');
-        logoImage.src = '../img/elements/logo_negro.png';
-        searchContainer.classList.remove('scrolled');
-        headerPopup.classList.remove('scrolled');
-    }
-}
-
-//(Responsive) Icono menú hamburguesa
-function displayIconMenuResponsive() {
-    var hamburgerIcon = document.getElementById('list-icon');
-    var headerPopup = document.getElementById('header__popup');
-
-    hamburgerIcon.addEventListener('click', function() {
-        headerPopup.classList.toggle('active');
-    })
-}
-
-//Botón para ir a la sección de musicales
-function scrollToShowsSection() {
-    var arrowIcon = document.getElementById('chevronleft-icon');
-    var showsSection = document.querySelector('.shows');
-    arrowIcon.addEventListener("click", function() {
-        showsSection.scrollIntoView({ behavior: 'smooth' });
-    })
-}
+});

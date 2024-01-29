@@ -1,0 +1,447 @@
+$details-color: black;
+$font-color: white;
+$panel-seats: #181818;
+$panel-box: #0b0b0b;
+$seat-disponible: #37b02c;
+$seat-selected: blue;
+$seat-reserved: #e92e19;
+$trash-color: red;
+$icon-color: #c3c3c3;
+
+
+.overlay {
+    background-color: rgba(1, 1, 1, 0);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    visibility: hidden;
+    z-index: 3;
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    transition: background-color 0.9s ease;
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        background-color: rgba(1, 1, 1, 0.5);
+    }
+}
+
+.popup-purchase {
+    position: fixed;
+    color: $details-color;
+    background-color: $font-color;
+    z-index: 100;
+    top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: justify;
+}
+
+.x-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.container-icon {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px 0;
+}
+
+.popup-overview {
+    position: fixed;
+    border: 3px solid $details-color;
+    color: $details-color;
+    background-color: $font-color;
+    z-index: 100;
+    top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    font-size: 10px;
+    text-align: justify;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+    &__content {
+        margin: 30px;
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            font-size: 13px;
+        }
+    }
+
+    &__button {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.tick-element {
+    max-width: 70px;
+    margin: 0 auto;
+}
+
+.circ {
+    opacity: 0;
+    stroke-dasharray: 130;
+    stroke-dashoffset: 130;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+.tick {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -o-transition: stroke-dashoffset 1s 0.5s ease-out;
+    transition: stroke-dashoffset 1s 0.5s ease-out;
+}
+
+.drawn + svg .path{
+    opacity: 1;
+    stroke-dashoffset: 0;
+}
+
+.banner--show {
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-direction: column;
+
+    h1 {
+        padding-top: 90px;
+        margin: 0;
+    }
+
+    h3 {
+        margin: 10px;
+        font-weight: 400;
+    }
+}
+
+.details-show {
+    background-color: $details-color;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &__date {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__item {
+        font-size: 11px;
+        text-align: center;
+        color: $font-color;
+        padding: 20px;
+
+        p {
+            margin: 0;
+        }
+
+        svg {
+            margin-bottom: 10px;
+        }
+
+        &--link {
+            cursor: pointer;
+        }
+    }
+}
+
+.separation {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.reserve-seats {
+    margin: 40px;
+
+    h2 {
+        text-align: center;
+    }
+}
+
+.seats-data {
+    margin: 0 0 20px 0;
+    font-size: 9px;
+}
+
+.panel-seats {
+    background-color: $panel-seats;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 30px 0;
+
+    &__item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 10px;
+        text-align: center;
+    }
+}
+
+.seat {
+    color: $font-color;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: $seat-disponible;
+    border-radius: 3px;
+    border: 2px solid $seat-disponible;
+    cursor: pointer;
+    margin: 0.7vw;
+    font-size: 5px;
+
+    &-row {
+        display: flex;
+    }
+
+    .selected {
+        background-color: $seat-selected;
+        border: 2px solid $seat-selected;
+    }
+
+    .reserved {
+        background-color: $seat-reserved;
+        border: 2px solid $seat-reserved;
+    }
+}
+
+.key {
+    display: flex;
+}
+
+.option-key {
+    display: flex;
+    align-items: center;
+    margin: 0 30px 0 0;
+
+    p {
+        margin: 0 0 0 10px;
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+}
+
+.panel-payment {
+    background-color: $details-color;
+    color: $font-color;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 0 0 30px 0;
+
+    h3 {
+        margin-top: 0;
+        text-align: center;
+    }
+}
+
+.panel-box {
+    position: relative;
+    color: $panel-box;
+    width: 100%;
+
+    &-double {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.icon-panel {
+    position: absolute;
+    color: $icon-color;
+    left: 15px;
+    top: 8px;
+}
+
+.input-payment-panel {
+    width: calc(100% - 20px);
+    border: none;
+    background-color: $font-color;
+    padding: 10px;
+    margin: 0 0 15px 0;
+    border-radius: 20px;
+    font-family: "Inter", sans-serif;
+    text-indent: 40px;
+    outline: none;
+    font-size: 12px;
+
+    &::placeholder {
+        color: $icon-color;
+    }
+}
+
+.button-pay {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin: 0;
+}
+
+.tickets {
+    border: 2px dashed $font-color;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    p {
+        font-size: 10px;
+        color: $font-color;
+        text-align: center;
+    }
+}
+
+.individual-ticket {
+    font-size: 10px;
+    color: $details-color;
+    background-color: $font-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 0 0 10px 0;
+    position: relative;
+
+    p {
+        margin: 0;
+    }
+
+    &__data {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.selected-tickets {
+    margin-bottom: 20px;
+}
+
+.trash-icon {
+    color: $trash-color;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px 10px 0 0;
+}
+
+@media (min-width: 780px) {
+    .popup-overview {
+        font-size: 14px;
+    }
+
+    .details-show {
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px;
+    }
+
+    .reserve-seats {
+        margin: 50px;
+    }
+
+    .reserve-seats h2 {
+        text-align: left;
+    }
+
+    .payment-area {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .square {
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .seats-data {
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .seat {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+
+    .seat-deleted {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+    }
+}
+
+@media (min-width: 1330px) {
+    .reserve-seats {
+        margin: 50px 140px;
+        overflow: hidden;
+    }
+
+    .payment-area {
+        display: block;
+    }
+    
+    .reserve-seats__content {
+        display: grid;
+        grid-template-columns: 70% 25%;
+        gap: 50px;
+        box-sizing: border-box;
+    }
+
+    .seat {
+        font-size: 0.7vw;
+        width: 2.5vw;
+        height:  2.5vw;
+        background-color: $seat-disponible;
+        border-radius: 10px;
+        border: 2px solid $seat-disponible;
+        cursor: pointer;
+        margin: 0.4vw;
+    }
+
+    .seat-deleted {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+}

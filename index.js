@@ -10,92 +10,76 @@ app.use(express.json());
 let shows = [];
 
 function loadShowsToJson() {
-  try {
-    const jsonData = fs.readFileSync('./server/data.json', 'utf8');
-    shows = JSON.parse(jsonData);
-  }catch (error) {
-    console.error('Error reading JSON file:', error);
-  }
+    try {
+        const jsonData = fs.readFileSync('./server/data.json', 'utf-8')
+        shows = JSON.parse(jsonData);
+    }catch (error) {
+        console.error('Error reading JSON file: ', error);
+    }
 }
 
-// Peticion GET para obtener el listado de obras (para la cartelera)
+
+//Peticion GET para obtener las obras
 app.get('/shows', (req, res) => {
-  try {
-    res.send(shows);
-  }catch (error) {
-    res.sendStatus(500);
-  }
+    try {
+        res.send(shows);
+    }catch (error) {
+        res.sendStatus(500);
+    }
 });
 
-// Peticion GET para obtener los detalles de una obra por ID
+//Peticion GET para obtener los detalles de una obra por su id
 app.get('/shows/:id', (req, res) => {
-  const numberID = parseInt(req.params.id);
-  const result = shows.filter(show => show.id === numberID);
-  if (result.length > 0) {
-    res.send(result);
-  } else {
-    res.sendStatus(404);
-  }
+    const numberID = parseInt(req.params.id);
+    const result = shows.filter(show => show.id  === numberID);
+    if (result.length > 0) {
+        res.send(result);
+    }else {
+        res.sendStatus(404);
+    }
 });
 
-// Peticion GET para obtener obras por genero
+//Peticion GET para obtener las obras por su genero
 app.get('/shows/genre/:genre', (req, res) => {
-  const genre = req.params.genre.toLowerCase(); 
-  const result = shows.filter(show => show.genre.toLowerCase() === genre);
-  if (result.length > 0) {
-    res.send(result);
-  }else {
-    res.sendStatus(404);
-  }
+    const genre = req.params.genre.toLowerCase();
+    const result = shows.filter(show => show.genre.toLowerCase() === genre);
+    if (result.length > 0) {
+        res.send(result);
+    }else {
+        res.sendStatus(404);
+    }
 });
 
-//Peticion GET para obtener los generos de obras que hay
+//Peticion GET para obtener los generos
 app.get('/genres', (req, res) => {
-  let genres = [];
-  for (let i = 0; i < shows.length; i++) {
-    if (!genres.includes(shows[i].genre)) {
-      genres.push(shows[i].genre);
-    };
-  };
-  genres.sort();
-  res.send(genres);
+    let genres = [];
+    for (let i = 0; i < shows.length; i++) {
+        if (!genres.includes(shows[i].genre)) {
+            genres.push(shows[i].genre);
+        }
+    }
+    genres.sort();
+    res.send(genres);
 });
 
-
-//Peticion GET para obtener 
-
-
-
-// Peticion POST/PUT para guardar las butacas ocupadas
+//Peticion POST
 app.post('/shows/:id/reserved-seats', (req, res) => {
-  const showId = parseInt(req.params.id);
-  const selectedSeats = req.body.seats;
+    const showId = parseInt(req.params.id);
+    const selectedSeats = req.body.seats;
+    const matchingShows = shows.filter(show => show.id === showId);
 
-  // Filtra la obra por ID en el array
-  const matchingShows = shows.filter(show => show.id === showId);
-
-  if (matchingShows.length > 0) {
-      // Filtra los nuevos asientos reservados que no están en el array existente
-      const uniqueReservedSeats = selectedSeats.filter(seat => !matchingShows[0].reservedSeats.includes(seat));
-
-      // Actualiza la información de las butacas reservadas en la obra
-      matchingShows[0].reservedSeats = matchingShows[0].reservedSeats.concat(uniqueReservedSeats);
-
-      // Guarda la información actualizada en el archivo JSON
-      fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
-
-      res.status(200).send({ reservedSeats: matchingShows[0].reservedSeats });
-  } else {
-      res.sendStatus(404);
-  }
+    if (matchingShows.length > 0) {
+        const uniqueReservedSeats = selectedSeats.filter(seat => !matchingShows[0].reservedSeats.includes(seat));
+        matchingShows[0].reservedSeats = matchingShows[0].reservedSeats.concat(uniqueReservedSeats);
+        fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
+        res.status(200).send({ reservedSeats: matchingShows[0].reservedSeats });
+    }else {
+        res.sendStatus(404);
+    }
 });
-
-
-
-
 
 
 app.listen(port, () => {
-  loadShowsToJson();
-  console.log(`App listening on port ${port}`);
-});
+    loadShowsToJson();
+    console.log(`App listening on port ${port}`);
+})

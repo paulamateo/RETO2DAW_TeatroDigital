@@ -8,16 +8,12 @@ window.onload = function() {
         purchasedSeats.push(seatId);
     }
 
-    // function printPurchasedSeats() {
-    //     console.log("Asientos comprados:", purchasedSeats.join(", "));
-    // }
-
     function markReservedSeats() {
         const areaSeatsContainer = document.getElementById('area-seats');
         const allSeats = areaSeatsContainer.querySelectorAll('.seat');
 
         reservedSeats.forEach(reservedSeat => {
-            const seatElement = allSeats[reservedSeat - 1]; // -1 because seat numbers start from 1
+            const seatElement = allSeats[reservedSeat - 1];
             if (seatElement) {
                 seatElement.classList.add('reserved');
                 seatElement.style.cursor = 'default'; 
@@ -25,52 +21,87 @@ window.onload = function() {
         });
     }
     
-
     checkAndRemoveAD();
     
     fetch(`http://localhost:3000/shows/${idParam}`)
-    .then(response => response.json())
-    .then(shows => {
-        const show = shows[0];
-        reservedSeats.push(...show.reservedSeats);
-        calculatePrice(show);
+        .then(response => response.json())
+        .then(shows => {
+            const show = shows[0];
+            reservedSeats.push(...show.reservedSeats);
+            calculatePrice(show);
 
-        showDetails(show);
+            //Detalles de la obra (género, precio, director/a, edad, duración, fecha y reseña)
+            const showBannerContainer = document.getElementById('container-banner');
+            showBannerContainer.innerHTML += `
+                <h1>${show.title}</h1>
+                <h3>${show.author}</h3>
+            `;
+            showBannerContainer.style.backgroundImage = `url(${show.banner})`;
         
-        const areaSeatsContainer = document.getElementById('area-seats');
-        const seatsPerRow = 15;
-        const totalSeats = show.seats;
-        const seatsToRemove = [68, 83, 98, 113, 128];
-        let seatCounter = 1;
-    
-        for (let i = 1; i <= totalSeats; i++) {
-            if (i % seatsPerRow === 1) {
-                const row = document.createElement('div');
-                row.classList.add('seat-row');
-                areaSeatsContainer.appendChild(row);
-            }
-    
-            if (seatsToRemove.includes(i)) {
-                const removeSeat = document.createElement('div');
-                removeSeat.classList.add('seat-deleted');
-                areaSeatsContainer.lastChild.appendChild(removeSeat);
-            }else {
-                const seatItem = document.createElement('div');
-                seatItem.classList.add('seat');
-                seatItem.textContent = seatCounter++;
-                areaSeatsContainer.lastChild.appendChild(seatItem);
+            document.getElementById('details-show__genre').textContent = show.genre;
+            document.getElementById('details-show__price').textContent = show.price;
+            document.getElementById('details-show__director').textContent = show.director;
+            document.getElementById('details-show__age').textContent = show.age;
+            document.getElementById('details-show__length').textContent = show.length;
+            document.getElementById('details-show__overview').textContent = show.overview;
+        
+            const showDateTime = new Date(show.date);
+            const day = showDateTime.getDate().toString().padStart(2, '0');
+            const month = (showDateTime.getMonth() + 1).toString().padStart(2, '0');
+            const year = showDateTime.getFullYear();
+            const showTime = showDateTime.toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
+            
+            document.getElementById('details-show__day').textContent = `${day}/${month}/${year} | ${showTime}h`;
+            
+            const button = document.getElementById('button-overview');
+            const overview = document.getElementById('popup-overview');
+            const closePopUp = document.getElementById('close-popup');
+        
+            button.addEventListener('click', function () {
+                overview.classList.toggle('active');
+            });
+        
+            closePopUp.addEventListener('click', function () {
+                overview.classList.remove('active');
+            });
+        
 
-                if (reservedSeats.includes(seatCounter)) {
-                    seatItem.classList.add('reserved');
-                    seatItem.style.cursor = 'default'; 
+            //CREAR ASIENTOS
+            const areaSeatsContainer = document.getElementById('area-seats');
+            const seatsPerRow = 15;
+            const totalSeats = show.seats;
+            const seatsToRemove = [68, 83, 98, 113, 128];
+            let seatCounter = 1;
+    
+            //Creación de los asientos (quitar asientos para formar un espacio)
+            for (let i = 1; i <= totalSeats; i++) {
+                if (i % seatsPerRow === 1) {
+                    const row = document.createElement('div');
+                    row.classList.add('seat-row');
+                    areaSeatsContainer.appendChild(row);
                 }
+        
+                if (seatsToRemove.includes(i)) {
+                    const removeSeat = document.createElement('div');
+                    removeSeat.classList.add('seat-deleted');
+                    areaSeatsContainer.lastChild.appendChild(removeSeat);
+                }else {
+                    const seatItem = document.createElement('div');
+                    seatItem.classList.add('seat');
+                    seatItem.textContent = seatCounter++;
+                    areaSeatsContainer.lastChild.appendChild(seatItem);
 
-               
+                    if (reservedSeats.includes(seatCounter)) {
+                        seatItem.classList.add('reserved');
+                        seatItem.style.cursor = 'default'; 
+                    }
+
+                    //Evento (click) para cada butaca. Creación del ticket individual
                     seatItem.addEventListener('click', function () {
                         if (!seatItem.classList.contains('selected')  && !seatItem.classList.contains('reserved')) {
                             seatItem.classList.toggle('selected');
                             savePurchasedSeat(seatItem.textContent);
-        
+            
                             const containerTickets = document.getElementById('selected-tickets');
                             let ticketItem = document.createElement('div');
                             ticketItem.classList.add('individual-ticket');
@@ -86,44 +117,44 @@ window.onload = function() {
                                     <p id="show__price"><strong>${show.price}€</strong></p>
                                 </div>
                             `;
+
                             containerTickets.appendChild(ticketItem);
                             calculatePrice(show);
-                            // printPurchasedSeats();
-            
+                
+                            //Eliminar ticket (y asiento seleccionado)
                             const trashIcon = ticketItem.querySelector('.trash-icon');
                             trashIcon.addEventListener('click', function () {
                                 const containerTickets = document.getElementById('selected-tickets');
                                 containerTickets.removeChild(ticketItem);
                                 seatItem.classList.remove('selected');
-                            
+                                
                                 selectedTicketCount = document.querySelectorAll('.seat.selected').length;
-    
+        
                                 const indexToRemove = purchasedSeats.indexOf(seatItem.textContent);
                                 if (indexToRemove !== -1) {
                                     purchasedSeats.splice(indexToRemove, 1);
                                 }
-                            
+                                
                                 checkAndRemoveAD();
                                 calculatePrice(show);
-                                // printPurchasedSeats();
                             });
                             
-                         
                             checkAndRemoveAD();
                         } 
                     });
-                
-    
-
+                    
+                }
             }
-        }
-        markReservedSeats();
-        openPopUpPay();
 
-    })
-    .catch(error => console.error('Error: ', error));
+            markReservedSeats();
+            openPopUpPay();
+
+        })
+        .catch(error => console.error('Error: ', error));
 }
 
+
+//Abrir pop-up. "Alerts" para manejar excepciones en el formulario
 function openPopUpPay() {
     var nameInput = document.querySelector('input[name="name-lastname_input"]');
     var emailInput = document.querySelector('input[name="email_input"]');
@@ -136,10 +167,11 @@ function openPopUpPay() {
     const overlay = document.getElementById('overlay');
     const buttonPay = document.getElementById('payment-button');
     const buttonClose = document.getElementById('button-close');
-    
+    const trigger = document.getElementById('trigger');
 
     buttonPay.addEventListener('click', function() {
-        const selectedSeats = document.querySelectorAll('.seat.selected');
+        const selectedSeats = document.querySelectorAll('.seat.selected');      
+        trigger.classList.add('drawn');
         
         if (selectedSeats.length > 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
             overlay.classList.add('active');
@@ -158,7 +190,7 @@ function openPopUpPay() {
 }
 
 
-
+//Limpiar datos del formulario de pago y los tickets de las butacas
 function clearSelectedSeatsAndTickets() {
     const selectedSeats = document.querySelectorAll('.seat.selected');
     const containerTickets = document.getElementById('selected-tickets');
@@ -184,13 +216,14 @@ function clearSelectedSeatsAndTickets() {
 }
 
 
+//Reservar butacas
 function reservation() {
     const selectedSeats = document.querySelectorAll('.seat.selected');
 
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get("id");
 
-
+    //Petición POST para guardar la reserva de butacas en la API
     fetch(`http://localhost:3000/shows/${idParam}/reserved-seats`, {
         method: 'POST',
         headers: {
@@ -205,12 +238,11 @@ function reservation() {
             seatItem.style.cursor = 'default'; 
         });    
     })
-    .catch(error => console.error('Error al enviar la solicitud:', error));
+    .catch(error => console.error('Error:', error));
 }
 
 
-
-
+//Calcular precio total por la/s butaca/s seleccionada/s
 function calculatePrice(show) {
     const selectedSeats = document.querySelectorAll('.seat.selected');
     selectedTicketCount = selectedSeats.length;
@@ -221,42 +253,8 @@ function calculatePrice(show) {
     document.getElementById("details-show__total-price").textContent = totalPrice.toFixed(2);
 }
 
-function showDetails(show) {
-    const showBannerContainer = document.getElementById('container-banner');
-    showBannerContainer.innerHTML += `
-        <h1>${show.title}</h1>
-        <h3>${show.author}</h3>
-    `;
-    showBannerContainer.style.backgroundImage = `url(${show.banner})`;
 
-    document.getElementById('details-show__genre').textContent = show.genre;
-    document.getElementById('details-show__price').textContent = show.price;
-    document.getElementById('details-show__director').textContent = show.director;
-    document.getElementById('details-show__age').textContent = show.age;
-    document.getElementById('details-show__length').textContent = show.length;
-    document.getElementById('details-show__overview').textContent = show.overview;
-
-    const showDateTime = new Date(show.date);
-    const day = showDateTime.getDate().toString().padStart(2, '0');
-    const month = (showDateTime.getMonth() + 1).toString().padStart(2, '0');
-    const year = showDateTime.getFullYear();
-    const showTime = showDateTime.toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
-    
-    document.getElementById('details-show__day').textContent = `${day}/${month}/${year} | ${showTime}h`;
-    
-    const button = document.getElementById('button-overview');
-    const overview = document.getElementById('popup-overview');
-    const closePopUp = document.getElementById('close-popup');
-
-    button.addEventListener('click', function () {
-        overview.classList.toggle('active');
-    });
-
-    closePopUp.addEventListener('click', function () {
-        overview.classList.remove('active');
-    });
-}
-
+//Coordenadas butaca. Calcular fila
 function calculateRow(seatNumber) {
     if (seatNumber <= 60) {
         return Math.ceil(seatNumber / 15);
@@ -266,6 +264,8 @@ function calculateRow(seatNumber) {
     }
 }
 
+
+//Coordenadas butaca. Calcular columna
 function calculateColumn(seatNumber) {
     const seatsPerRow = 15;
     const columnsBeforeGap = 7;
@@ -284,6 +284,8 @@ function calculateColumn(seatNumber) {
     }
 }
 
+
+//Crear mensaje al no haber ninguna butaca seleccionada
 function createAD() {
     const container = document.getElementById('ad');
     const text = document.createElement('div');
@@ -294,6 +296,8 @@ function createAD() {
     container.appendChild(text);
 }
 
+
+//Verificar si hay  alguna butaca seleccionada y crear mensaje
 function checkAndRemoveAD() {
     const containerAD = document.getElementById('ad');
     
