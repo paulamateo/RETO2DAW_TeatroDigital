@@ -86,12 +86,13 @@ window.onload = function() {
                     removeSeat.classList.add('seat-deleted');
                     areaSeatsContainer.lastChild.appendChild(removeSeat);
                 }else {
+                    const seatNumber = seatCounter++;
                     const seatItem = document.createElement('div');
                     seatItem.classList.add('seat');
-                    seatItem.textContent = seatCounter++;
+                    seatItem.textContent = seatNumber;
                     areaSeatsContainer.lastChild.appendChild(seatItem);
 
-                    if (reservedSeats.includes(seatCounter)) {
+                    if (reservedSeats.includes(seatNumber)) {
                         seatItem.classList.add('reserved');
                         seatItem.style.cursor = 'default'; 
                     }
@@ -130,7 +131,7 @@ window.onload = function() {
                                 
                                 selectedTicketCount = document.querySelectorAll('.seat.selected').length;
         
-                                const indexToRemove = purchasedSeats.indexOf(seatItem.textContent);
+                                const indexToRemove = purchasedSeats.indexOf(seatNumber.textContent);
                                 if (indexToRemove !== -1) {
                                     purchasedSeats.splice(indexToRemove, 1);
                                 }
