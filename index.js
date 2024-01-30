@@ -19,19 +19,16 @@ function loadShowsToJson() {
 }
 
 //OBRAS
-//Peticion GET para obtener las obras
+//Petición GET para obtener las obras
 app.get('/shows', (req, res) => {
-    try {
-        res.send(shows);
-    }catch (error) {
-        res.sendStatus(500);
-    }
+    res.send(shows);
 });
 
-//Peticion GET para obtener los detalles de una obra por su id
+//Petición GET para obtener los detalles de una obra por su id
 app.get('/shows/:id', (req, res) => {
-    const numberID = parseInt(req.params.id);
-    const result = shows.filter(show => show.id  === numberID);
+    const showId = parseInt(req.params.id);
+    const result = shows.filter(show => show.id  === showId);
+
     if (result.length > 0) {
         res.send(result);
     }else {
@@ -39,33 +36,35 @@ app.get('/shows/:id', (req, res) => {
     }
 });
 
-//Peticion POST para agregar una obra
+//Petición POST para agregar una obra
 app.post('/shows', (req, res) => {
-    try {
-        const newShow = req.body;
-        newShow.id = shows.length > 0 ? shows[shows.length - 1].id + 1 : 1;
+    const newShow = req.body;
+    newShow.id = shows.length > 0 ? shows[shows.length - 1].id + 1 : 1;
+
+    if (newShow) {
         shows.push(newShow);
         fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
-        res.status(201).send('Show added successfully.');
-    }catch (error) {
+        res.sendStatus(200);
+    }else {
         res.sendStatus(500);
     }
 });
 
-//Peticion DELETE para eliminar una obra
+//Petición DELETE para eliminar una obra
 app.delete('/shows/:id', (req, res) => {
-    try {
-        const showId = parseInt(req.params.id);
-        const showToDelete = shows.findIndex(show => show.id === showId);
+    const showId = parseInt(req.params.id);
+    const showToDelete = shows.findIndex(show => show.id === showId);
+
+    if (showToDelete.length > 0) {
         shows.splice(showToDelete, 1);
         fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
-        res.send('Show deleted successfully.');
-    }catch (error) {
+        res.sendStatus(200);
+    }else {
         res.sendStatus(404);
     }
 });
 
-//Peticion PUT para actualizar una obra
+//Petición PUT para actualizar una obra
 app.put('/shows/:id', (req, res) => {
     const showId = parseInt(req.params.id);
     const showToUpdate = req.body;
@@ -77,7 +76,7 @@ app.put('/shows/:id', (req, res) => {
         fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
         res.send('Show updated successfully.');
     }else {
-        res.status(404).send('Show not found.');
+        res.sendStatus(404);
     }
 });
 

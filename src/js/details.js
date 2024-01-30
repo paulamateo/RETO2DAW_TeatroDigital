@@ -37,7 +37,8 @@ window.onload = function() {
                 <h3>${show.author}</h3>
             `;
             showBannerContainer.style.backgroundImage = `url(${show.banner})`;
-        
+
+            document.getElementById('pageTitle').textContent = show.title;
             document.getElementById('details-show__genre').textContent = show.genre;
             document.getElementById('details-show__price').textContent = show.price;
             document.getElementById('details-show__director').textContent = show.director;
