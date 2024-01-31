@@ -169,14 +169,14 @@ window.onload = function() {
                 const selectedSeats = document.querySelectorAll('.seat.selected');      
                 trigger.classList.add('drawn');
                 
-                if (selectedSeats.length > 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
+                if (selectedSeats.length > 0 && nameInput.value !== "" && validateEmail() && validateMobilePhone() && cardHolderInput.value !== "" && validateCreditCard() && validateDateCreditCard() && validatePassword()) {
                     overlay.classList.add('active');
                     reservation();
                     clearSelectedSeatsAndTickets();
-                }else if (selectedSeats.length === 0 && nameInput.value !== "" && emailInput.value !== "" && phoneInput.value !== "" && cardHolderInput.value !== "" && cardNumberInput.value !== "" && dateInput.value !== "" && cvvInput.value !== "") {
+                }else if (selectedSeats.length === 0 && nameInput.value !== "" && validateEmail() && validateMobilePhone() && cardHolderInput.value !== "" && validateCreditCard() && validateDateCreditCard() && validatePassword()) {
                     alert("Por favor, selecciona alguna butaca.");
                 }else {
-                    alert("Por favor, completa todos los campos.");
+                    alert("Por favor, completa todos los campos y/o revisa sus datos.");
                 }
             });
         

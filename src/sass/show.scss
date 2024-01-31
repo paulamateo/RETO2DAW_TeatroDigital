@@ -9,6 +9,12 @@ $trash-color: red;
 $icon-color: #c3c3c3;
 
 
+.error-message {
+    color: $trash-color;
+    font-size: 10px;
+    text-align: center;
+}
+
 .popup-overview {
     position: fixed;
     border: 3px solid $details-color;
