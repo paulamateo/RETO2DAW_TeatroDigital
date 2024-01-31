@@ -1,0 +1,19 @@
+{
+  "name": "reto2daw_teatrodigital",
+  "version": "1.0.0",
+  "description": "Objetivos del proyecto\r -\r La propuesta “Del Diseño a la Realidad Digital: Tu Creatividad, Nuestra Guía” está\r pensada para desafiar a los estudiantes en el desarrollo de habilidades técnicas y de\r colaboración, con el fin de lograr un producto que no solo cumpla con los requisitos\r técnicos, sino que también ofrezca una experiencia de usuario superior.\r - Crear una interfaz de usuario intuitiva y elegante basada en las especificaciones\r del cliente.\r - Implementar un sistema de reservas y venta de entradas en línea eficiente.\r - Desarrollar una API REST con Node.js con Express.js.\r - Asegurar una experiencia de usuario responsiva y atractiva en distintos\r dispositivos.\r - Fomentar el trabajo en equipo y aplicar las mejores prácticas de desarrollo\r colaborativo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
