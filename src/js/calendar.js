@@ -51,13 +51,13 @@ window.onload = function () {
                         const cell = document.createElement('td');
 
                         if (i === 0 && j < firstDayOfMonth - 1) {
-                            // Días anteriores al mes
+                            //Días anteriores al mes
                             const prevMonthDays = new Date(year, month - 1, 0).getDate();
                             const prevMonthDay = prevMonthDays - (firstDayOfMonth - 1 - j) + 1;
                             cell.textContent = prevMonthDay;
                             cell.classList.add('prev-month-day', 'no-hover');
                         }else if (dayCounter <= daysInMonth) {
-                            // Días del mes actual
+                            //Días del mes actual
                             const dayKey = `${year}-${month}-${dayCounter}`;
                             const dayShows = showsByDate[dayKey] || [];
 
@@ -88,7 +88,7 @@ window.onload = function () {
                             dayCounter++;
 
                         }else {
-                            // Días posteriores al mes
+                            //Días posteriores al mes
                             const nextMonthDay = dayCounter - daysInMonth;
                             cell.textContent = nextMonthDay;
                             cell.classList.add('next-month-day', 'no-hover');

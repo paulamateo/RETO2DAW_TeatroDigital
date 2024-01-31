@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //Icono menu hamburguesa
+    //Icono menú hamburguesa
     var hamburgerIcon = document.getElementById('list-icon');
     var headerPopup = document.getElementById('header__popup');
     

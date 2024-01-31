@@ -74,7 +74,7 @@ app.put('/shows/:id', (req, res) => {
     if(showIndexToUpdate !== -1) {
         shows[showIndexToUpdate] = {...shows[showIndexToUpdate], ...showToUpdate};
         fs.writeFileSync('./server/data.json', JSON.stringify(shows, null, 2), 'utf8');
-        res.send('Show updated successfully.');
+        res.sendStatus(200);
     }else {
         res.sendStatus(404);
     }

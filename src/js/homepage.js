@@ -1,12 +1,12 @@
 window.onload = function() {
-    //Ir a la seccion 'Vive la magia musical'
+    //Ir a la sección 'Vive la magia musical'
     var arrowIcon = document.getElementById('chevronleft-icon');
     var showsSection = document.querySelector('.shows');
     arrowIcon.addEventListener("click", function() {
         showsSection.scrollIntoView({ behavior: 'smooth' });
     })
 
-    //Cargar las obras que tienen el genero 'musical'
+    //Cargar las obras que tienen el género 'musical'
     let grid = document.getElementById('shows-grid__musical-genre'); 
 
     fetch('http://localhost:3000/shows/genre/musical')
