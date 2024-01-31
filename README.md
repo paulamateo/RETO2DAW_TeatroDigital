@@ -41,3 +41,13 @@ Para iniciar la API, es necesario lanzar el siguiente comando en la terminal:
     npm start
 
 ### 3.1.- Testeo mediante Hoppscotch 
+**- Espectáculos (shows)**<br>
+`GET` all shows | `GET` show by id | `POST` show | `DELETE` show | `PUT` show<br>
+<br>![image](https://github.com/paulamateo/RETO2DAW_TeatroDigital/assets/118843344/447f21eb-b598-45e2-af81-80d300190743)
+
+**- Géneros**<br>
+`GET` all genres | `GET` shows by genre<br>
+<div align="center">
+    <img src="https://github.com/paulamateo/RETO2DAW_TeatroDigital/assets/118843344/7876951e-abff-476a-8788-6d91573c4840" alt="Imagen" height="120px">
+</div>
+
