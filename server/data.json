@@ -12,7 +12,10 @@
     "banner": "../img/banners/b_phantom.png",
     "scene": "../img/scenes/s_phantom.png",
     "seats": 135,
-    "reservedSeats": [],
+    "reservedSeats": [
+      59,
+      60
+    ],
     "overview": "En la majestuosa Ópera Garnier de París, 'El Fantasma de la Ópera' despliega una intrigante trama donde la talentosa soprano Christine Daaé se encuentra en medio de un apasionante triángulo amoroso. Entre el enigmático Fantasma, un genio musical desfigurado que la guía desde las sombras, y el apasionado vizconde Raoul de Chagny, la historia explora los límites entre la belleza y la fealdad, la obsesión y la devoción, creando una atmósfera fascinante en el esplendor de la ópera parisina. La narrativa se teje con emociones intensas, llevando al espectador a las profundidades de la pasión humana, la tragedia y el misterio en un escenario donde la música y el amor convergen de manera inolvidable.",
     "id": 1
   },
