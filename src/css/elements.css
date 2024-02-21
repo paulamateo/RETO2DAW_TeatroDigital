@@ -1,3 +1,61 @@
+.btn-lock {
+  display: inline-block;
+  background: red; 
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
+  padding: 12px 5px 10px 14px;
+  border-radius: 50%;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease; 
+}
+
+.btn-lock svg {
+  fill: none;
+}
+
+.btn-lock svg .lock {
+  stroke: #fff;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: all 0.4s ease;
+}
+
+.btn-lock svg .lockb {
+  fill: #fff;
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  transition: all 0.2s ease;
+}
+
+#input-padlock {
+  display: none;
+}
+
+#input-padlock:checked + label {
+  background: green;
+  stroke-dasharray: 36;
+
+}
+
+#input-padlock:checked + label svg .lock {
+  stroke-dasharray: 48;
+  animation: locked 0.3s linear forwards;
+  stroke-dasharray: 36;
+  
+} 
+
+#input-padlock:checked + label svg .lockb {
+  transform: rotate(5deg);
+  transform-origin: 14px 22px;
+}
+
+
+
+
+
 /*NUEVO*/
 .button-action--visibility {
   display: none;

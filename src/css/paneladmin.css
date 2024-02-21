@@ -1,0 +1,43 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    /* grid-template-columns: 200px auto; 
+    width: 100%; / */
+}
+
+.column-tabs {
+    background-color: #363740;
+    height: 100vh;
+    color: white;
+}
+
+.column-data {
+    background-color: #EAECF0;
+    width: 100%;
+}
+
+.column-data__header {
+    background-color: white;
+    padding: 20px;
+}
+
+.column-data__header h2 {
+    margin: 0;
+}
+
+.column-data__content {
+    margin: 40px;
+}
+
+.container-button {
+    display: flex;
+    justify-content: end; 
+}
+
+.button-create-element {
+    all: unset;
+    background-color: #000AFF;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
